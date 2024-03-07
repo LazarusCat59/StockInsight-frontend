@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { classroom,navbar } from './components/index1';
 import logo from './logo.svg';
 import './App.css';
 import axios, { AxiosResponse } from 'axios'
@@ -40,9 +41,11 @@ function App() {
 
 	return (
 		<div className="App">
-		<h1>{data}</h1>
+		<h1><b>Stock-Insight</b> </h1>
 		</div>
 	);
 }
 
+
 export default App;
+
