@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { classroom,navbar } from './components/index1';
+import {Navbar} from './components/Index1';
 import logo from './logo.svg';
 import './App.css';
 import axios, { AxiosResponse } from 'axios'
+import { Pageheader } from './components/Pageheader';
+<source />
 
 interface Data {
 	id: number;
@@ -40,9 +42,13 @@ function App() {
 	})()
 
 	return (
-		<div className="App">
-		<h1><b>Stock-Insight</b> </h1>
+		<div className="flex bg-black">
+		<div className="Navbar">
+			<Navbar />
 		</div>
+		<div className=" p-7 text-3xl font-mono text-white ">Homepage</div>
+		</div>
+		
 	);
 }
 
