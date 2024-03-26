@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {Navbar} from './components/Index1';
+import { BrowserRouter , Route, Routes ,Link} from 'react-router-dom';
+import {Navbar,Home, Mainpage, Login,Footer} from './components/Index1';
 import logo from './logo.svg';
 import './App.css';
 import axios, { AxiosResponse } from 'axios'
@@ -42,15 +43,21 @@ function App() {
 	})()
 
 	return (
-		<div className="flex bg-black">
-		<div className="Navbar">
-			<Navbar />
-		</div>
-		<div className=" p-7 text-3xl font-mono text-white ">Homepage</div>
-		</div>
-		
-	);
+		<div className="App bg-black">
+			<BrowserRouter>
+			<Routes>
+			<Route path = '/login' element={<Login/>}/>
+				<Route path ='/' element={ <Mainpage/>} />
+			</Routes>
+			<Footer />
+			</BrowserRouter>
+			
+ 
+      </div>
+    
+  );
 }
+		
 
 
 export default App;
