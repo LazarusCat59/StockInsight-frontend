@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter , Route, Routes ,Link} from 'react-router-dom';
-import {Navbar,Home, Mainpage, Login,Footer} from './components/Index1';
+import {Navbar,Home, Mainpage, Login,Footer,Request} from './components/Index1';
 import logo from './logo.svg';
 import './App.css';
 import axios, { AxiosResponse } from 'axios'
@@ -41,19 +41,29 @@ function App() {
 			setData(resdata[0].text)
 		}
 	})()
+	function RequestWithNavbar() {
+		return (
+		  <div>
+			<Navbar />
+			<Request />
+		  </div>
+		);
+	  }
 
 	return (
-		<div className="App bg-black">
+		<div className="App ">
 			<BrowserRouter>
 			<Routes>
+			<Route path ='/' element={ <Mainpage/>} />
+			<Route path ='/request' element={ <Request/>} />
 			<Route path = '/login' element={<Login/>}/>
-				<Route path ='/' element={ <Mainpage/>} />
 			</Routes>
 			<Footer />
 			</BrowserRouter>
 			
  
       </div>
+	  
     
   );
 }
