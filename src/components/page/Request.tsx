@@ -1,38 +1,42 @@
 import React from 'react';
-import { Navbar } from '../Index1';
+import { Navbar } from '../Imports';
+
+
 
 const Request: React.FC = () => {
   return (
-    <div className="bg-white flex-auto ">
-      <div className="max-w-lg  justify-center  ">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">New Stock Request</h2>
-          <p className="text-lg mb-8">Please fill out this form to request new stock. Once you submit the form, it will be sent to the Head Of Department for approval</p>
-        </div>
-        <form>
-          <div className="mb-4">
-            <input type="text" placeholder="Item name" className="w-full h-12 border border-gray-300 rounded-md px-4 bg-gray-100 focus:outline-none focus:border-blue-500" />
-          </div>
-          <div className="mb-4">
-            <input type="text" placeholder="Item description" className="w-full h-12 border border-gray-300 rounded-md px-4 bg-gray-100 focus:outline-none focus:border-blue-500" />
-          </div>
-          <div className="mb-4">
-            <select className="w-full h-12 border border-gray-300 rounded-md px-4 bg-gray-100 focus:outline-none focus:border-blue-500">
-              <option value="" disabled selected>Select location</option>
-              <option value="Lab1">Lab1</option>
-              <option value="Lab2">Lab2</option>
-              <option value="Lab3">Lab3</option>
-              <option value="Class">Class</option>
-              <option value="Staff Room">Staff Room</option>
-            </select>
-          </div>
-          <div className="text-center">
-            <button type="submit" className="w-full h-12 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Submit Request</button>
-          </div>
-        </form>
+    <div className="flex justify-start">
+      <Navbar />
+<div className="container mx-auto px-10 py-32">
+  <div className="mb-8 flex items-center justify-between">
+    <h1 className="text-xl font-bold text-gray-800">New Stock Request</h1>
+    <div className="flex items-center space-x-2"></div>
+  </div>
+  <div className="rounded-md border bg-white px-8 py-6 shadow-xl">
+    <p className="mb-4 text-gray-700">Please fill out this form to request new stock. Once you submit the form, it will be sent to the Head of Department for approval.</p>
+    <form className="space-y-4">
+      <div className="mb-4 flex flex-col">
+        <label htmlFor="itemName" className="mb-2 font-medium text-gray-700">Item name</label>
+        <input type="text" id="itemName" className="appearance-none rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-75" />
       </div>
-    </div>
-  );
+      <div className="mb-4 flex flex-col">
+        <label htmlFor="itemDescription" className="mb-2 font-medium text-gray-700">Item description</label>
+        <textarea id= "itemDescription"className="appearance-none rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-75"rows={4}></textarea>
+      </div>
+      <div className="mb-4 flex flex-col">
+        <label htmlFor="location" className="mb-2 font-medium text-gray-700">Location</label>
+        <input type="text" id="location" className="appearance-none rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-75" />
+      </div>
+      <button type="submit" className="rounded-md bg-blue-500 px-4 py-2 font-bold text-white shadow hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50">Submit Request</button>
+    </form>
+  </div>
+</div>
+</div>
+
+
+
+  )
 };
+
 
 export default Request;

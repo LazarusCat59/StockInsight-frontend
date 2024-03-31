@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar } from './Index1';
+import { Navbar } from './Imports';
 
 const Mainpage = () => {
   return (
