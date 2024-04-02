@@ -1,5 +1,5 @@
 export {  default as Home } from './page/Home';
-export {  default as Navbar } from './Navbar/Navbar';
+export {  default as Sidebar } from './Navbar/Sidebar';
 export {  default as Login} from './page/Login';
 export {  default as Mainpage} from './Mainpage';
 export {  default as Footer } from './Navbar/Footer';

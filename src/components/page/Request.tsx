@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar } from '../Imports';
+import { Sidebar } from '../Imports';
 import { useState } from 'react';
 
 
@@ -26,7 +26,7 @@ const Request: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-start"><Navbar />
+    <div className="flex justify-start"><Sidebar />
     <div className="container mx-auto px-10 py-32">
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-xl font-bold text-gray-800">New Stock Request</h1>

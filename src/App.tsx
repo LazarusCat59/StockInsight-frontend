@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter , Route, Routes ,Link} from 'react-router-dom';
-import {Navbar,Home, Mainpage, Login,Footer,Request} from './components/Imports';
+import {Sidebar,Home,Mainpage,Login,Footer,Request} from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 import axios, { AxiosResponse } from 'axios'
@@ -44,7 +44,7 @@ function App() {
 	function RequestWithNavbar() {
 		return (
 		  <div>
-			<Navbar />
+			<Sidebar />
 			<Request />
 		  </div>
 		);

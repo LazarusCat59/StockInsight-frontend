@@ -1,11 +1,8 @@
 import React from 'react';
-import { Navbar } from './Imports';
-
 const Mainpage = () => {
   return (
     <div className="flex">
         <div className="bg-white">
-        <Navbar />
     </div>
     </div>  
   );
