@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { getLoginToken } from '../../apicalls';
+import { authContext, LoginDetails } from '../../App';
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
+	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
+	const [needsRedirect, setNeedsRedirect] = useState(false);
+
+	if(loginToken) {
+		setNeedsRedirect(true);
+	}
+
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -16,10 +26,25 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData); // Log form data to the console
+    // console.log(formData); Log form data to the console
     // You can add further logic here, like sending the form data to the server
+		(async () => {
+			let token = await getLoginToken(formData.username, formData.password);
+			if(typeof token !== "undefined") {
+				setLoginToken(token);
+				setNeedsRedirect(true);
+			} else {
+				// Login failed
+				console.error("Login failed");
+			}
+			})()
   };
 
+	if(needsRedirect) {
+		return (
+		<Navigate replace to="/"/>
+		);
+	} else {
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -50,6 +75,6 @@ const Login = () => {
     </div>
   );
 };
+}
 
 export default Login;
-

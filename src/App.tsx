@@ -1,46 +1,28 @@
-import React, { useState } from 'react';
-import { BrowserRouter , Route, Routes ,Link} from 'react-router-dom';
-import {Sidebar,Home,Mainpage,Login,Footer,Request} from './components/Imports';
+import React, { useState, createContext, useEffect } from 'react';
+import { BrowserRouter, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { Sidebar, Home, Mainpage, Login,Footer,Request} from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
-import axios, { AxiosResponse } from 'axios'
 import { Pageheader } from './components/Pageheader';
+import { getLoginToken, getStockList } from './apicalls';
 <source />
 
-interface Data {
-	id: number;
-	text: string;
-};
-
-async function getRequest(): Promise<Array<Data> | undefined> {
-	try {
-		let response = await axios.get('http://127.0.0.1:8000/api/data');
-		
-		let data: Array<Data> = response.data;
-		
-		return data;
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			// Handle Axios-specific errors
-			console.error("Axios error:", error.message);
-		} else if(error instanceof Error) {
-			// Handle general errors
-			console.error("General error:", error.message);
-			return;
-		}
-	}
+export interface LoginDetails {
+	loginToken: string;
+	setLoginToken: (logintoken: string) => void;
 }
 
-function App() {
-	const [data, setData] = useState("Updating...");
+export const authContext = createContext<LoginDetails | null>(null);
 
-	(async () => {
-		let resdata = await getRequest();
-		console.log(resdata);
-		if(typeof resdata !== 'undefined') {
-			setData(resdata[0].text)
-		}
-	})()
+function App() {
+	const [loginToken, setLoginToken] = useState(
+	() => JSON.parse(localStorage.getItem('login_token')!)
+	);
+
+	useEffect(() => {
+		localStorage.setItem('login_token', JSON.stringify(loginToken));
+	}, [loginToken])
+
 	function RequestWithNavbar() {
 		return (
 		  <div>
@@ -51,23 +33,25 @@ function App() {
 	  }
 
 	return (
-		<div className="App ">
+			<div className="App ">
 			<BrowserRouter>
+			<authContext.Provider value={{loginToken, setLoginToken}}>
 			<Routes>
-			<Route path ='/' element={ <Mainpage/>} />
-			<Route path ='/request' element={ <Request/>} />
-			<Route path = '/login' element={<Login/>}/>
+			<Route path ='/' element={ loginToken ? <Mainpage/> : <Navigate to='/login'/>} />
+			<Route path ='/request' element={ loginToken ? <Request/> : <Navigate to='/login'/>} />
+			<Route path ='/login' element={ loginToken ? <Navigate to='/'/> : <Login/>}/>
 			</Routes>
 			<Footer />
+			</authContext.Provider>
 			</BrowserRouter>
-			
- 
-      </div>
-	  
-    
-  );
+
+
+			</div>
+
+
+			);
 }
-		
+
 
 
 export default App;
