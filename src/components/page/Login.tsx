@@ -42,7 +42,7 @@ const Login = () => {
 
 	if(needsRedirect) {
 		return (
-		<Navigate replace to="/"/>
+		<Navigate replace to="/request"/>
 		);
 	} else {
   return (

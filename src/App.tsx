@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate } from 'react-router-dom';
-import { Sidebar, Home, Mainpage, Login,Footer,Request} from './components/Imports';
+import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout} from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 import { Pageheader } from './components/Pageheader';
@@ -37,9 +37,11 @@ function App() {
 			<BrowserRouter>
 			<authContext.Provider value={{loginToken, setLoginToken}}>
 			<Routes>
-			<Route path ='/' element={ loginToken ? <Mainpage/> : <Navigate to='/login'/>} />
+			<Route path ='/' element={ loginToken ? <Home/> : <Mainpage/>} />
+			{/* <Route path ='/home' element={ loginToken ? <Home/> : <Navigate to='/login'/>} /> */}
 			<Route path ='/request' element={ loginToken ? <Request/> : <Navigate to='/login'/>} />
 			<Route path ='/login' element={ loginToken ? <Navigate to='/'/> : <Login/>}/>
+			<Route path ='/logout' element={ loginToken ? <Logout/> : <Navigate to='/'/>} />
 			</Routes>
 			<Footer />
 			</authContext.Provider>
