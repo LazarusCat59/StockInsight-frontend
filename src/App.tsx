@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate } from 'react-router-dom';
-import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout} from './components/Imports';
+import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit} from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 import { Pageheader } from './components/Pageheader';
@@ -42,6 +42,8 @@ function App() {
 			<Route path ='/request' element={ loginToken ? <Request/> : <Navigate to='/login'/>} />
 			<Route path ='/login' element={ loginToken ? <Navigate to='/'/> : <Login/>}/>
 			<Route path ='/logout' element={ loginToken ? <Logout/> : <Navigate to='/'/>} />
+			<Route path ='/audit' element={<Audit/>} />
+
 			</Routes>
 			<Footer />
 			</authContext.Provider>
