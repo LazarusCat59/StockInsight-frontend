@@ -16,7 +16,7 @@ const Navbar = () => {
   const Menus = [
     { title: "Dashboard", path: "/" },
     { title: "Reports", icon: <FaChartLine />, path: "/reports" },
-    { title: "Audits", icon: <AiOutlineAudit />, path: "/audits" },
+    { title: "Audits", icon: <AiOutlineAudit />, path: "/audit" },
     { title: "Requests", icon: <BiMessageEdit />, spacing: true, path: "/request" },
     { title: "History", icon: <GoHistory />, path: "/history" },
     { title: "Settings", icon: <IoMdSettings />, spacing: true, path: "/settings" }
