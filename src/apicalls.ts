@@ -12,6 +12,12 @@ interface Token {
 	token: string;
 };
 
+interface User {
+	username: string;
+	email: string;
+	role: string;
+}
+
 interface Stock {
 	id: number;
 	name: string;
@@ -98,6 +104,21 @@ export async function getLoginToken(uname: string, pwd: string): Promise<string 
 
 export async function getStockList(token: string): Promise<List | undefined> {
 	let data: APIError | List | undefined = await makeRequest("GET", "http://127.0.0.1:8000/api/stock_list/", { headers: { "Authorization" : `Token ${token}` }});
+	console.log(data);
+
+	if(typeof data === "undefined") {
+		return;
+	} else if(isAPIError(data)) {
+		console.error(data.detail);
+		return;
+	}
+
+	return data;
+}
+
+
+export async function createUser(token: string, uname: string, pwd: string, email: string, role:string): Promise<User | undefined> {
+	let data: APIError | User | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/register/", { username: uname, password: pwd, email: email, role: role, headers: { "Authorization" : `Token ${token}` }});
 	console.log(data);
 
 	if(typeof data === "undefined") {
