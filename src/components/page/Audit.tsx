@@ -1,5 +1,6 @@
 import React from 'react'
-import { Sidebar } from '../Imports'
+import { Sidebar , Header} from '../Imports'
+import { FaComputer } from "react-icons/fa6";
 
 const Audit = () => {
 	return (
@@ -16,23 +17,41 @@ const Audit = () => {
       <input
         className="w-full rounded bg-slate-200 placeholder:text-center hover:bg-slate-300 py-1 px-4"
         type="text"
-        placeholder="Search inventory by name or SKU"
+        placeholder="Search by product name or Location"
       />
     </div>
-    <div className="container mx-auto mt-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 grid-flow-row">
-      <a
-        className="outline outline-gray-300 rounded mx-2 my-2 p-3 hover:bg-slate-300"
-        href="https://google.com"
-      >
-        <img
-          src="https://bgr.com/wp-content/uploads/2021/12/16-macbook-pro-8.jpg?quality=82&strip=all"
-          alt="Macbook Pro"
-          className="rounded-full object-cover aspect-square p-3"
-        />
-        <h3 className="font-bold text-center">Macbook Pro</h3>
-        <p className="font-extralight text-center">SKU: 123-456-789</p>
-      </a>
-    </div>
+    <div className="container mx-auto mt-8 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 grid-flow-row">
+  <div className="outline outline-gray-300 rounded mx-2 my-2 p-3 hover:bg-slate-300">
+    <a href="/audit">
+    <FaComputer className="w-48 h-48  object-cover aspect-square p-3 mx-auto"/>
+      <h3 className="font-bold text-center">DB LAB</h3>
+      <p className="font-extralight text-center">A-414</p>
+    </a>
+  </div>
+  <div className="outline outline-gray-300 rounded mx-2 my-2 p-3 hover:bg-slate-300">
+    <a href="https://google.com">
+      <img
+        src="https://bgr.com/wp-content/uploads/2021/12/16-macbook-pro-8.jpg?quality=82&strip=all"
+        alt="Macbook Pro"
+        className="w-48 h-48 rounded-full object-cover aspect-square p-3 mx-auto"
+      />
+      <h3 className="font-bold text-center">Macbook Pro</h3>
+      <p className="font-extralight text-center">SKU: 123-456-789</p>
+    </a>
+  </div>
+  <div className="outline outline-gray-300 rounded mx-2 my-2 p-3 hover:bg-slate-300">
+    <a href="https://google.com">
+      <img
+        src="https://bgr.com/wp-content/uploads/2021/12/16-macbook-pro-8.jpg?quality=82&strip=all"
+        alt="Macbook Pro"
+        className="w-48 h-48 rounded-full object-cover aspect-square p-3 mx-auto"
+      />
+      <h3 className="font-bold text-center">Macbook Pro</h3>
+      <p className="font-extralight text-center">SKU: 123-456-789</p>
+    </a>
+  </div>
+</div>
+
     <div className="container mx-auto mt-6">
       <h1 className="text-xl font-extrabold mb-1">Recent Audits</h1>
       <div className="flex my-2">
@@ -44,7 +63,29 @@ const Audit = () => {
           View Report
         </button>
       </div>
+
+      <div className="flex my-2">
+        <p className="mr-auto">
+          <span>2022-01-18 12:30PM</span><br/>
+          <span className="text-slate-500 text-sm">Completed 4 days ago</span>
+        </p>
+        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200">
+          View Report
+        </button>
+      </div>
+
+      <div className="flex my-2">
+        <p className="mr-auto">
+          <span>2022-01-18 12:30PM</span><br/>
+          <span className="text-slate-500 text-sm">Completed 4 days ago</span>
+        </p>
+        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200">
+          View Report
+        </button>
+      </div>
+      
     </div>
+    
   </div>
 </div>
   )

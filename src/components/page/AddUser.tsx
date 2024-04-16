@@ -1,10 +1,21 @@
+import { useState } from 'react';
 import React from 'react';
-import { Sidebar } from '../Imports';
+import {Sidebar } from '../Imports';
+
 
 const AddUser = () => {
+
+    const [showDropdown, setShowDropdown] = useState(false);
+  
+    const toggleDropdown = () => {
+      setShowDropdown(!showDropdown);
+    };
+  
+  
 	return (
-<div>
+<div className="flex ">
   <Sidebar/>
+  <div className="flex flex-col items-center justify-center w-full" id="main">
   <h2 className="text-4xl font-boldtext-black dark:text-gray-100 mx-60">
     Users
   </h2>
@@ -18,7 +29,7 @@ const AddUser = () => {
     >
       Search
     </label>
-    <div className="relative">
+    <div className="">
       <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
         <svg
           className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -106,64 +117,15 @@ const AddUser = () => {
       id="dropdownHoverButton"
       data-dropdown-toggle="dropdownHover"
       data-dropdown-trigger="hover"
-      className="text-white w-80 mb-5 bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
-      type="button"
-    >
-      User Type
-      <svg
-        className="w-2.5 h-2.5 ml-3"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 10 6"
+      className={`ml-6 text-white w-80 mb-5 bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800`} onClick={toggleDropdown}
       >
-        <path
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="m1 1 4 4 4-4"
-        />
-      </svg>
+      User Type ↓
     </button>
-    <div
-      id="dropdownHover"
-      className="absolute z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 -mt-1"
-    >
-      <ul
-        className="py-2 text-sm text-gray-700 dark:text-gray-200"
-        aria-labelledby="dropdownHoverButton"
-      >
-        <li>
-          <a
-            href="#"
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            Head Of Department
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            Stock Auditor
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            Stock Custodian
-          </a>
-        </li>
-      </ul>
-    </div>
+    
   </div> 
   <button
     type="button"
-    className="text-white bg-gradient-to-r mx-60 from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+    className="text-white bg-gradient-to-r  from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
   >
     Add User
   </button>
@@ -173,9 +135,11 @@ const AddUser = () => {
   >
     Remove User
   </button>
+  </div>
 </div>
 	)
 }
+
 
 export default AddUser;
 export {};

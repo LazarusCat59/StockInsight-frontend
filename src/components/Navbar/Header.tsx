@@ -17,7 +17,7 @@ let navigate = useNavigate();
   }
 
   return (
-    <BrowserRouter>
+   
 <div className="w-full h-14 bg-blue-950 ">
   <div className="flex flex-row-reverse"> 
     <RiAccountCircleFill className={`s text-white text-5xl cursor-pointer hover:shadow-lg rounded-full `} onClick={toggleDropdown}> </RiAccountCircleFill>
@@ -29,9 +29,9 @@ let navigate = useNavigate();
       Profile
       </li>
       <li className={`flex items-center p-2 cursor-pointer hover:border border-black rounded-md ease-in `}>
-      <Route>
+      
       <IoMdLogOut className={`mr-2 text-2xl`} onClick={routeChange}> </IoMdLogOut> 
-      </Route>
+      
       Logout
       </li>
       
@@ -41,7 +41,7 @@ let navigate = useNavigate();
   </div>
   
 </div>
-</BrowserRouter>
+
 
      
   )

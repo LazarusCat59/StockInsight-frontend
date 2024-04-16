@@ -1,10 +1,11 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate } from 'react-router-dom';
-import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit, AddUser } from './components/Imports';
+import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit, AddUser, Profile } from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 import { Pageheader } from './components/Pageheader';
 import { getLoginToken, getStockList } from './apicalls';
+import Header from './components/Navbar/Header';
 <source />
 
 export interface LoginDetails {
@@ -35,6 +36,7 @@ function App() {
 	return (
 			<div className="App ">
 			<BrowserRouter>
+			<Header />
 			<authContext.Provider value={{loginToken, setLoginToken}}>
 			<Routes>
 			<Route path ='/' element={ loginToken ? <Home/> : <Mainpage/>} />
@@ -42,9 +44,10 @@ function App() {
 			<Route path ='/request' element={ loginToken ? <Request/> : <Navigate to='/login'/>} />
 			<Route path ='/login' element={ loginToken ? <Navigate to='/'/> : <Login/>}/>
 			<Route path ='/logout' element={ loginToken ? <Logout/> : <Navigate to='/'/>} />
-			<Route path ='/audit' element={<Audit/>} />
+			<Route path ='/audit-h' element={<Audit/>} />
 			<Route path ='/adduser' element={<AddUser/>} />
-
+			<Route path ='/profile' element={<Profile/>} />
+			<Route path='/head' element={<Header/>} />
 			</Routes>
 			<Footer />
 			</authContext.Provider>
