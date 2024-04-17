@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes, Link, Navigate } from 'react-router-dom';
 import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit, AddUser, Profile } from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
-import { Pageheader } from './components/Pageheader';
 import { getLoginToken, getStockList } from './apicalls';
 import Header from './components/Navbar/Header';
 <source />
@@ -48,6 +47,7 @@ function App() {
 			<Route path ='/adduser' element={<AddUser/>} />
 			<Route path ='/profile' element={<Profile/>} />
 			<Route path='/head' element={<Header/>} />
+			<Route path="/mainpage" element={<Mainpage/>}/>
 			</Routes>
 			<Footer />
 			</authContext.Provider>
