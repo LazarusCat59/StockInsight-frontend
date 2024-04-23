@@ -7,7 +7,7 @@ const Audit = () => {
 
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
-    let path = `/newaudit`; 
+    let path = `/stockaudit`; 
     navigate(path);
   }
 	return (
