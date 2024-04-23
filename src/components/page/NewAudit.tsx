@@ -100,21 +100,21 @@ const NewAudit = () => {
      </div>
   <div className="my-10 grid grid-flow-row grid-cols-4">
     <p className="text-center font-bold">Keyboard</p>
-    <input type="radio" name="keyboard" />
-    <input type="radio" name="keyboard" />   
-    <input type="radio" name="keyboard" />
+    <input type="radio" name="keyboard" onChange={() => handleRadioChange('keyboard', 'Good')} /> 
+    <input type="radio" name="keyboard" onChange={() => handleRadioChange('keyboard', 'Average')} />   
+    <input type="radio" name="keyboard" onChange={() => handleRadioChange('keyboard', 'Bad')} /> 
   </div>
   <div className="my-10 grid grid-flow-row grid-cols-4">
     <p className="text-center font-bold">Monitor</p>
-    <input type="radio" name="monitor" />
-    <input type="radio" name="monitor" />
-    <input type="radio" name="monitor" />
+    <input type="radio" name="monitor" onChange={() => handleRadioChange('monitor', 'Good')} /> 
+    <input type="radio" name="monitor" onChange={() => handleRadioChange('monitor', 'Average')} /> 
+    <input type="radio" name="monitor" onChange={() => handleRadioChange('monitor', 'Bad')} /> 
   </div>
   <div className="my-10 grid grid-flow-row grid-cols-4 pb-8">
     <p className="text-center font-bold">CPU</p>
-    <input type="radio" name="cpu" />
-    <input type="radio" name="cpu" />
-    <input type="radio" name="cpu" />
+    <input type="radio" name="cpu" onChange={() => handleRadioChange('cpu', 'Good')} /> 
+    <input type="radio" name="cpu" onChange={() => handleRadioChange('cpu', 'Average')} /> 
+    <input type="radio" name="cpu" onChange={() => handleRadioChange('cpu', 'Bad')} /> 
   </div>
   </div>
   <div className="flex justify-center items-center ">
