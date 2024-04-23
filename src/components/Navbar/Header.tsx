@@ -19,7 +19,8 @@ let navigate = useNavigate();
   return (
    
 <div className="w-full h-14 bg-blue-950 ">
-  <div className="flex flex-row-reverse"> 
+  <div className="flex flex-row-reverse "> 
+  <div>
     <RiAccountCircleFill className={`s text-white text-5xl cursor-pointer hover:shadow-lg rounded-full `} onClick={toggleDropdown}> </RiAccountCircleFill>
     {showDropdown && (
   <div className="absolute z-10 top-12 right-0 bg-white shadow rounded-md">
@@ -37,9 +38,10 @@ let navigate = useNavigate();
       
     </ul>
   </div>
-)}
-  </div>
   
+)}
+</div>
+  </div>
 </div>
 
 

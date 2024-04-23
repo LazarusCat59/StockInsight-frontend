@@ -1,10 +1,11 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate } from 'react-router-dom';
-import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit, AddUser, Profile } from './components/Imports';
+import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit, AddUser, Profile , StockAudit, Header ,NewAudit } from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 import { getLoginToken, getStockList } from './apicalls';
-import Header from './components/Navbar/Header';
+
+
 <source />
 
 export interface LoginDetails {
@@ -43,11 +44,13 @@ function App() {
 			<Route path ='/request' element={ loginToken ? <Request/> : <Navigate to='/login'/>} />
 			<Route path ='/login' element={ loginToken ? <Navigate to='/'/> : <Login/>}/>
 			<Route path ='/logout' element={ loginToken ? <Logout/> : <Navigate to='/'/>} />
-			<Route path ='/audit-h' element={<Audit/>} />
+			<Route path ='/audit' element={<Audit/>} />
 			<Route path ='/adduser' element={<AddUser/>} />
 			<Route path ='/profile' element={<Profile/>} />
 			<Route path='/head' element={<Header/>} />
 			<Route path="/mainpage" element={<Mainpage/>}/>
+			<Route path="/stockaudit" element={<StockAudit/>}/>
+			<Route path="/newaudit" element={<NewAudit />} />
 			</Routes>
 			<Footer />
 			</authContext.Provider>

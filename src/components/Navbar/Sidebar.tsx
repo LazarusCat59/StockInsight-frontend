@@ -17,7 +17,6 @@ const Navbar = () => {
     { title: "Dashboard", path: "/" },
     { title: "Reports", icon: <FaChartLine />, path: "/reports" },
     { title: "Audits", icon: <AiOutlineAudit />, path: "/audit" },
-    { title: "History", icon: <GoHistory />, path: "/history" },
     { title: "Requests", icon: <BiMessageEdit />, spacing: true, path: "/request" },
     { title: "Settings", icon: <IoMdSettings />, spacing: true, path: "/settings" }
   ];
@@ -53,9 +52,7 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div>
-          <IoMdLogOut className={`h-20 ml-2 text-white cursor-pointer float-left text-2xl `} onClick={routeChange} ><h1>Logout</h1></IoMdLogOut>
-        </div>
+    
         
       </div>
     </div>
