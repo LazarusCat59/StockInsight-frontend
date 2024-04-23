@@ -19,33 +19,41 @@ interface User {
 }
 
 interface Stock {
-	id: number;
+	id: string;
 	name: string;
 	description: string | null;
-	audit_details: number | null;
-	type: number | null;
+	audit_details: string | null;
+	type: string | null;
 }
 
 interface StockType {
-	id: number;
+	id: string;
 	name: string;
 	category: string;
 }
 
 interface AuditDetails {
-	id: number;
+	id: string;
 	auditor_name: string;
 	time: string;
 	condition: string;
 	remarks: string;
-	auditor: number;
+	auditor: string;
+}
+
+interface Computer {
+	id: string;
+	keyboard: string;
+	mouse: string;
+	cpu: string;
+	monitor: string;
 }
 
 interface List {
 	count: number;
 	next: number | null;
 	previous: number | null;
-	results: Array<Stock | AuditDetails | StockType>;
+	results: Array<Stock | AuditDetails | StockType | Computer>;
 }
 
 function isAPIError(err: any): err is APIError {
@@ -116,6 +124,19 @@ export async function getStockList(token: string): Promise<List | undefined> {
 	return data;
 }
 
+export async function getComputerList(token: string): Promise<List | undefined> {
+	let data: APIError | List | undefined = await makeRequest("GET", "http://127.0.0.1:8000/api/computer_list/", { headers: { "Authorization" : `Token ${token}` }});
+	console.log(data);
+
+	if(typeof data === "undefined") {
+		return;
+	} else if(isAPIError(data)) {
+		console.error(data.detail);
+		return;
+	}
+
+	return data;
+}
 
 export async function createUser(token: string, uname: string, pwd: string, email: string, role:string): Promise<User | undefined> {
 	let data: APIError | User | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/register/", { username: uname, password: pwd, email: email, role: role, headers: { "Authorization" : `Token ${token}` }});
