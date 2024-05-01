@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate } from 'react-router-dom';
-import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit, AddUser } from './components/Imports';
+import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit, AddUser,Stockaud,Auditsystem,Addstock} from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 import { Pageheader } from './components/Pageheader';
@@ -44,6 +44,10 @@ function App() {
 			<Route path ='/logout' element={ loginToken ? <Logout/> : <Navigate to='/'/>} />
 			<Route path ='/audit' element={<Audit/>} />
 			<Route path ='/adduser' element={<AddUser/>} />
+			<Route path ='/Stockaud' element={<Stockaud/>} />
+			<Route path ='/Auditsystem' element={<Auditsystem/>} />
+			<Route path ='/Addstock' element={<Addstock/>} />
+			
 
 			</Routes>
 			<Footer />
