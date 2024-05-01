@@ -16,10 +16,10 @@ const AddUser = () => {
 <div className="flex ">
   <Sidebar/>
   <div className="flex flex-col items-center justify-center w-full" id="main">
-  <h2 className="text-4xl font-boldtext-black dark:text-gray-100 mx-60">
+  <h2 className="text-4xl font-boldtext-black text-gray-900 mx-60">
     Users
   </h2>
-  <h3 className="my-4 text-lg text-gray-600 dark:text-gray-300 mx-60">
+  <h3 className="my-4 text-lg text-gray-600 text-gray-900 mx-60">
     Manage who can View and edit the stock management system
   </h3>
   <form className="max-w-screen-lg mx-auto">

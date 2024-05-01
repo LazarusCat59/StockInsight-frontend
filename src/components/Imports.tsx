@@ -11,5 +11,6 @@ export { default as Header  } from './Navbar/Header';
 export { default as Profile } from './page/Profile' ;       
 export {  default as StockAudit } from './page/StockAudit';
 export {  default as NewAudit } from './page/NewAudit';
-//export {  default as Classroom } from './classroom/classroom';
-//can be used for upcoming exports
+export { default as Stockaud } from './page/Stockaud';
+export { default as Auditsystem } from './page/Auditsystem';
+export { default as Addstock } from './page/Addstock';
