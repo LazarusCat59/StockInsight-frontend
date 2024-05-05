@@ -12,28 +12,31 @@ interface Token {
 	token: string;
 };
 
-interface User {
+export interface User {
 	username: string;
 	email: string;
 	role: string;
 }
 
-interface Stock {
-	id: string;
+export interface Stock {
+	id: number;
+	url: string;
 	name: string;
 	description: string | null;
 	audit_details: string | null;
 	type: string | null;
 }
 
-interface StockType {
-	id: string;
+export interface StockType {
+	id: number;
+	url: string;
 	name: string;
 	category: string;
 }
 
-interface AuditDetails {
-	id: string;
+export interface AuditDetails {
+	id: number;
+	url: string;
 	auditor_name: string;
 	time: string;
 	condition: string;
@@ -41,18 +44,19 @@ interface AuditDetails {
 	auditor: string;
 }
 
-interface Computer {
-	id: string;
+export interface Computer {
+	id: number;
+	url: string;
 	keyboard: string;
 	mouse: string;
 	cpu: string;
 	monitor: string;
 }
 
-interface List {
+export interface List {
 	count: number;
-	next: number | null;
-	previous: number | null;
+	next: string | null;
+	previous: string | null;
 	results: Array<Stock | AuditDetails | StockType | Computer>;
 }
 
@@ -66,12 +70,17 @@ interface LabLocationList {
 	locations: Array<LabLocation>;
 }
 
+
 function isAPIError(err: any): err is APIError {
 	return (err as APIError).detail !== undefined;
 }
 
 function isLoginError(err: any): err is LoginError {
 	return (err as LoginError).non_field_errors !== undefined;
+}
+
+export function isStock(stock: any): stock is Stock {
+	return (stock as Stock).name !== undefined;
 }
 
 async function makeRequest(type: string, url: string, reqdata: any): Promise<any> {
@@ -120,9 +129,20 @@ export async function getLoginToken(uname: string, pwd: string): Promise<string 
 	return data.token;
 }
 
-export async function getStockList(token: string): Promise<List | undefined> {
-	let data: APIError | List | undefined = await makeRequest("GET", "http://127.0.0.1:8000/api/stock_list/", { headers: { "Authorization" : `Token ${token}` }});
-	console.log(data);
+export async function getStockList(token: string, name: string, location: string): Promise<List | undefined> {
+	let data: APIError | List | undefined = undefined
+
+	if(name !== '' && location !== '') {
+		data = await makeRequest("GET", "http://127.0.0.1:8000/api/stock_list/", { params: { name: name, location: location }, headers: { "Authorization" : `Token ${token}` }});
+	} else if(name !== '') {
+		data = await makeRequest("GET", "http://127.0.0.1:8000/api/stock_list/", { params: { name: name }, headers: { "Authorization" : `Token ${token}` }});
+	} else if(location !== '') {
+		data = await makeRequest("GET", "http://127.0.0.1:8000/api/stock_list/", { params: { location: location }, headers: { "Authorization" : `Token ${token}` }});
+	} else {
+		data = await makeRequest("GET", "http://127.0.0.1:8000/api/stock_list/", { headers: { "Authorization" : `Token ${token}` }});
+	}
+
+	// console.log(data);
 
 	if(typeof data === "undefined") {
 		return;
@@ -136,7 +156,7 @@ export async function getStockList(token: string): Promise<List | undefined> {
 
 export async function getComputerList(token: string): Promise<List | undefined> {
 	let data: APIError | List | undefined = await makeRequest("GET", "http://127.0.0.1:8000/api/computer_list/", { headers: { "Authorization" : `Token ${token}` }});
-	console.log(data);
+	// console.log(data);
 
 	if(typeof data === "undefined") {
 		return;
@@ -150,7 +170,7 @@ export async function getComputerList(token: string): Promise<List | undefined> 
 
 export async function createUser(token: string, uname: string, pwd: string, email: string, role:string): Promise<User | undefined> {
 	let data: APIError | User | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/register/", { username: uname, password: pwd, email: email, role: role, headers: { "Authorization" : `Token ${token}` }});
-	console.log(data);
+	// console.log(data);
 
 	if(typeof data === "undefined") {
 		return;
@@ -164,7 +184,7 @@ export async function createUser(token: string, uname: string, pwd: string, emai
 
 export async function getLocations(token: string): Promise<LabLocationList | undefined> {
 	let data: APIError | LabLocationList | undefined = await makeRequest("GET", "http://127.0.0.1:8000/api/locations/", { headers: { "Authorization" : `Token ${token}` }});
-	console.log(data);
+	// console.log(data);
 
 	if(typeof data === "undefined") {
 		return;
