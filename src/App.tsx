@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate, useLocation } from 'react-router-dom';
-import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit, AddUser,Profile ,StockAudit , NewAudit ,Header, Stockaud,Auditsystem,Addstock} from './components/Imports';
+import { Sidebar, Home, Mainpage, Login,Footer,Request, Logout, Audit, AddUser,Profile , Locations , NewAudit ,Header, Stockaud,Auditsystem,Addstock} from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 import { getLoginToken, getStockList } from './apicalls';
@@ -57,7 +57,7 @@ function RoutesLocation() {
 	<Route path ='/profile' element={<Profile/>} />
 	<Route path='/head' element={<Header/>} />
 	<Route path="/mainpage" element={<Mainpage/>}/>
-	<Route path="/stockaudit" element={<StockAudit/>}/>
+	<Route path="/locations" element={<Locations/>}/>
 	<Route path="/newaudit" element={<NewAudit />} />
 			<Route path ='/Stockaud' element={<Stockaud/>} />
 			<Route path ='/Auditsystem' element={<Auditsystem/>} />

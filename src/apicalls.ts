@@ -56,6 +56,16 @@ interface List {
 	results: Array<Stock | AuditDetails | StockType | Computer>;
 }
 
+export interface LabLocation {
+	code: string;
+	name: string;
+}
+
+interface LabLocationList {
+	length: number;
+	locations: Array<LabLocation>;
+}
+
 function isAPIError(err: any): err is APIError {
 	return (err as APIError).detail !== undefined;
 }
@@ -140,6 +150,20 @@ export async function getComputerList(token: string): Promise<List | undefined> 
 
 export async function createUser(token: string, uname: string, pwd: string, email: string, role:string): Promise<User | undefined> {
 	let data: APIError | User | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/register/", { username: uname, password: pwd, email: email, role: role, headers: { "Authorization" : `Token ${token}` }});
+	console.log(data);
+
+	if(typeof data === "undefined") {
+		return;
+	} else if(isAPIError(data)) {
+		console.error(data.detail);
+		return;
+	}
+
+	return data;
+}
+
+export async function getLocations(token: string): Promise<LabLocationList | undefined> {
+	let data: APIError | LabLocationList | undefined = await makeRequest("GET", "http://127.0.0.1:8000/api/locations/", { headers: { "Authorization" : `Token ${token}` }});
 	console.log(data);
 
 	if(typeof data === "undefined") {
