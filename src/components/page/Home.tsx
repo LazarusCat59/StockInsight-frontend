@@ -7,7 +7,7 @@ const Home = () => {
       <Sidebar/>
       <h1> 
       <div className="flex flex-col justify-start space-x-96">
-  <h1 className=" text-centre text-xl font-bold text-gray-800 p-s ml-4">Dashboard</h1>
+  <h1 className=" text-centre text-xl font-bold text-gray-800 p-s ml-4"></h1>
   <div className="mb-8 flex justify-center">
     <div className="flex space-x-16 p-10">
       <div className="container mx-auto rounded-md border border-gray-300">
@@ -53,10 +53,6 @@ const Home = () => {
         <p className="mt-2 text-sm text-gray-600">Status: In Progress</p>
       </div>
     </div>
-  </div>
-  <div className="justspace-x-4 flex">
-    <button className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-700">New Audit</button>
-    <button className="rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-200">Filters</button>
   </div>
 </div>
       </h1>

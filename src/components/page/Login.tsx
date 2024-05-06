@@ -1,11 +1,20 @@
 import React, { useContext, useState } from 'react';
 import { getLoginToken } from '../../apicalls';
 import { authContext, LoginDetails } from '../../App';
-import { Navigate } from 'react-router-dom';
+import { Navigate,Route,useNavigate } from 'react-router-dom';
+import path from 'path';
+import Mainpage from '../Mainpage';
+
 
 const Login = () => {
 	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
 	const [needsRedirect, setNeedsRedirect] = useState(false);
+
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/`; 
+    navigate(path);
+  }
 
 	if(loginToken) {
 		setNeedsRedirect(true);
@@ -27,14 +36,12 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log(formData); Log form data to the console
-    // You can add further logic here, like sending the form data to the server
 		(async () => {
 			let token = await getLoginToken(formData.username, formData.password);
 			if(typeof token !== "undefined") {
 				setLoginToken(token);
 				setNeedsRedirect(true);
 			} else {
-				// Login failed
 				console.error("Login failed");
 			}
 			})()
@@ -65,13 +72,18 @@ const Login = () => {
                   <input type="password" name="password" id="password" placeholder="     ••••••••" className="border border-black shadow-md w-96 h-10 rounded-md" onChange={handleInputChange} required />
                 </div>
                 <div className=" flex justify-center items-center">
-                <button type="submit" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign in</button>
+                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign in</button>
                 </div>
               </form>
             </div>
           </div>
+          <div className="flex justify-center mb-20 mt-20">
+      <button type="submit" className={`text-white bg-gray-500 hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"`} onClick={routeChange} >Select Account Type</button>
+      </div>
         </div>
+        
       </section>
+      
     </div>
   );
 };
