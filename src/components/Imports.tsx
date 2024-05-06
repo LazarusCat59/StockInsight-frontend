@@ -15,3 +15,4 @@ export { default as Stockaud } from './page/Stockaud';
 export { default as Auditsystem } from './page/Auditsystem';
 export { default as Addstock } from './page/Addstock';
 export { default as StocksAtLocation } from './page/StocksAtLocation';
+export { default as StockView } from './page/StockView';

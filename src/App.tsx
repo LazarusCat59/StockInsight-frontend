@@ -1,8 +1,8 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate, useLocation } from 'react-router-dom';
 import { Sidebar, Home, Mainpage, Login, Footer, Request, Logout, Audit, 
-					AddUser, Profile, Locations, NewAudit, Header, Stockaud, Auditsystem,
-					Addstock, StocksAtLocation } from './components/Imports';
+	AddUser, Profile, Locations, NewAudit, Header, Stockaud, Auditsystem,
+	Addstock, StocksAtLocation, StockView } from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 <source />
@@ -51,19 +51,21 @@ function RoutesLocation() {
       <Routes>
         <Route path ='/' element={ loginToken ? <Home/> : <Mainpage/>} />
         <Route path ='/request' element={ loginToken ? <Request/> : <Navigate to='/login'/>} />
-	<Route path ='/login' element={ loginToken ? <Navigate to='/'/> : <Login/>}/>
-	<Route path ='/logout' element={ loginToken ? <Logout/> : <Navigate to='/'/>} />
-	<Route path ='/audit' element={<Audit/>} />
-	<Route path ='/adduser' element={<AddUser/>} />
-	<Route path ='/profile' element={<Profile/>} />
-	<Route path='/head' element={<Header/>} />
-	<Route path="/mainpage" element={<Mainpage/>}/>
-	<Route path="/locations" element={<Locations/>}/>
-	<Route path="/locations/:locationId" element={<StocksAtLocation/>}/>
-	<Route path="/newaudit" element={<NewAudit />} />
-			<Route path ='/Stockaud' element={<Stockaud/>} />
-			<Route path ='/Auditsystem' element={<Auditsystem/>} />
-			<Route path ='/Addstock' element={<Addstock/>} />
+				<Route path ='/login' element={ loginToken ? <Navigate to='/'/> : <Login/>}/>
+				<Route path ='/logout' element={ loginToken ? <Logout/> : <Navigate to='/'/>} />
+				<Route path ='/audit' element={<Audit/>} />
+				<Route path ='/adduser' element={<AddUser/>} />
+				<Route path ='/profile' element={<Profile/>} />
+				<Route path='/head' element={<Header/>} />
+				<Route path="/mainpage" element={<Mainpage/>}/>
+				<Route path="/locations" element={<Locations/>}/>
+				<Route path="/locations/:locationId" element={<StocksAtLocation/>}/>
+				<Route path="/stocks/:stockId" element={<StockView/>}/>
+				<Route path="/audit/:stockId" element={<NewAudit/>}/>
+				<Route path="/newaudit" element={<NewAudit />} />
+				<Route path ='/Stockaud' element={<Stockaud/>} />
+				<Route path ='/Auditsystem' element={<Auditsystem/>} />
+				<Route path ='/Addstock' element={<Addstock/>} />
       </Routes>
     </>
   );

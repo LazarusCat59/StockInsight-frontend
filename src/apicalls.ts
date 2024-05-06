@@ -23,6 +23,10 @@ export interface Stock {
 	url: string;
 	name: string;
 	description: string | null;
+	item_code: string;
+	bill_no: string;
+	purchase_date: string;
+	location: string;
 	audit_details: string | null;
 	type: string | null;
 }
@@ -40,13 +44,14 @@ export interface AuditDetails {
 	auditor_name: string;
 	time: string;
 	condition: string;
-	remarks: string;
-	auditor: string;
+	remarks: string | null;
+	auditor: string | null;
 }
 
 export interface Computer {
 	id: number;
 	url: string;
+	name: string;
 	keyboard: string;
 	mouse: string;
 	cpu: string;
@@ -60,14 +65,14 @@ export interface List {
 	results: Array<Stock | AuditDetails | StockType | Computer>;
 }
 
-export interface LabLocation {
+export interface Choices {
 	code: string;
 	name: string;
 }
 
-interface LabLocationList {
+interface ChoicesList {
 	length: number;
-	locations: Array<LabLocation>;
+	results: Array<Choices>;
 }
 
 
@@ -83,17 +88,21 @@ export function isStock(stock: any): stock is Stock {
 	return (stock as Stock).name !== undefined;
 }
 
-async function makeRequest(type: string, url: string, reqdata: any): Promise<any> {
+export function isAudit(audit: any): audit is AuditDetails {
+	return (audit as AuditDetails).auditor_name !== undefined;
+}
+
+async function makeRequest(type: string, url: string, reqdata: any, config?: any): Promise<any> {
 	try {
 		let response: AxiosResponse;
 		if(type === 'GET') {
 			response = await axios.get(url, reqdata);
 		} else if(type === 'POST') {
-			response = await axios.post(url, reqdata);
+			response = await axios.post(url, reqdata, config);
 		} else if(type === 'PATCH') {
-			response = await axios.patch(url, reqdata);
+			response = await axios.patch(url, reqdata, config);
 		} else if(type === 'DELETE') {
-			response = await axios.delete(url, reqdata);
+			response = await axios.delete(url, config);
 		} else {
 			console.log("Invalid type of request");
 			return;
@@ -169,7 +178,7 @@ export async function getComputerList(token: string): Promise<List | undefined> 
 }
 
 export async function createUser(token: string, uname: string, pwd: string, email: string, role:string): Promise<User | undefined> {
-	let data: APIError | User | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/register/", { username: uname, password: pwd, email: email, role: role, headers: { "Authorization" : `Token ${token}` }});
+	let data: APIError | User | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/register/", { username: uname, password: pwd, email: email, role: role}, { headers: { "Authorization" : `Token ${token}` }});
 	// console.log(data);
 
 	if(typeof data === "undefined") {
@@ -182,8 +191,95 @@ export async function createUser(token: string, uname: string, pwd: string, emai
 	return data;
 }
 
-export async function getLocations(token: string): Promise<LabLocationList | undefined> {
-	let data: APIError | LabLocationList | undefined = await makeRequest("GET", "http://127.0.0.1:8000/api/locations/", { headers: { "Authorization" : `Token ${token}` }});
+export async function getChoices(token: string, choice: number): Promise<ChoicesList | undefined> {
+	let data: APIError | ChoicesList | undefined;
+	if(choice === 1) {
+		data = await makeRequest("GET", "http://127.0.0.1:8000/api/locations/", { headers: { "Authorization" : `Token ${token}` }});
+	} else if(choice === 2) {
+		data = await makeRequest("GET", "http://127.0.0.1:8000/api/categories/", { headers: { "Authorization" : `Token ${token}` }});
+	} else if(choice === 3) {
+		data = await makeRequest("GET", "http://127.0.0.1:8000/api/conditions/", { headers: { "Authorization" : `Token ${token}` }});
+	} else {
+			console.error("Invalid choice");
+			return;
+	}
+	// console.log(data);
+
+	if(typeof data === "undefined") {
+		return;
+	} else if(isAPIError(data)) {
+		console.error(data.detail);
+		return;
+	}
+
+	return data;
+}
+
+export async function getStock(token: string, id: number | string): Promise<Stock | undefined> {
+	let data: APIError | Stock | undefined;
+	if(typeof id === 'number') {
+		data = await makeRequest("GET", `http://127.0.0.1:8000/api/stock/${id}/`, { headers: { "Authorization" : `Token ${token}` }});
+	} else {
+		data = await makeRequest("GET", id, { headers: { "Authorization" : `Token ${token}` }});
+	}
+
+	if(typeof data === "undefined") {
+		return;
+	} else if(isAPIError(data)) {
+		console.error(data.detail);
+		return;
+	}
+
+	return data;
+}
+
+export async function getAudit(token: string, id: number | string): Promise<AuditDetails | undefined> {
+	let data: APIError | AuditDetails | undefined;
+	if(typeof id === 'number') {
+		data = await makeRequest("GET", `http://127.0.0.1:8000/api/audit/${id}/`, { headers: { "Authorization" : `Token ${token}` }});
+	} else {
+		data = await makeRequest("GET", id, { headers: { "Authorization" : `Token ${token}` }});
+	}
+
+	if(typeof data === "undefined") {
+		return;
+	} else if(isAPIError(data)) {
+		console.error(data.detail);
+		return;
+	}
+
+	return data;
+}
+
+export async function setAudit(token: string, stockId: number, condition: string, remarks: string) {
+	console.log(condition, remarks);
+	let data: APIError | AuditDetails | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/audit_create/", { condition: condition, remarks: remarks}, { headers: { "Authorization" : `Token ${token}` } });
+	
+	if(typeof data === "undefined") {
+		return;
+	} else if(isAPIError(data)) {
+		console.error(data.detail);
+		return;
+	}
+
+	console.log(data.url);
+	let stock: APIError | Stock | undefined = await makeRequest("PATCH", `http://127.0.0.1:8000/api/stock/${stockId}/`, { audit_details: data.url },{ headers: { "Authorization" : `Token ${token}` }});
+		
+	if(typeof stock === "undefined") {
+		return;
+	} else if(isAPIError(stock)) {
+		console.error(stock.detail);
+		return;
+	}
+
+	return data;
+}
+
+export async function getAuditList(token: string): Promise<List | undefined> {
+	let data: APIError | List | undefined = undefined
+
+	data = await makeRequest("GET", "http://127.0.0.1:8000/api/audit_list/", { headers: { "Authorization" : `Token ${token}` }});
+
 	// console.log(data);
 
 	if(typeof data === "undefined") {

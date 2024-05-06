@@ -50,6 +50,5 @@ const StocksAtLocation = () => {
 );
 }
 
-
 export default StocksAtLocation;
 export{};

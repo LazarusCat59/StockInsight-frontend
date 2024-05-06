@@ -1,15 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Sidebar , Header} from '../Imports'
 import { FaComputer } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import { AuditDetails, getAuditList, isAudit } from '../../apicalls';
+import { LoginDetails, authContext } from '../../App';
 
 const Audit = () => {
+	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
+
+	const [audits, setAudits] = useState<Array<AuditDetails>>([{
+		id: 0,
+		url: '',
+		auditor_name: '',
+		time:'',
+		condition: '',
+		remarks: '',
+		auditor: ''
+	}]);
 
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
-    let path = `/stockaudit`; 
+    let path = `/locations/LAB_1`; 
     navigate(path);
   }
+
+	useEffect(() => {
+		getAuditList(loginToken).then(adtlist => {
+			if(typeof adtlist !== 'undefined') {
+				
+				function isArrayOfAudits(audits: unknown): audits is AuditDetails[] {
+					return Array.isArray(audits) && audits.every(item => isAudit(item));
+				}
+				if(isArrayOfAudits(adtlist.results)) {
+					setAudits(adtlist.results);
+				}
+			}
+		});
+	}, []);
 	return (
 <div className="flex">
   <Sidebar />
@@ -29,38 +56,18 @@ const Audit = () => {
 
     <div className="container mx-auto mt-6">
       <h1 className="text-xl font-extrabold mb-1">Recent Audits</h1>
+			{audits.map((item, index) => (
       <div className="flex my-2">
         <p className="mr-auto">
-          <span>2022-01-18 12:30PM</span><br/>
-          <span className="text-slate-500 text-sm">Completed 4 days ago</span>
+          <span>{item.time}</span><br/>
+          <span className="text-slate-500 text-sm">Completed</span>
         </p>
-        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200">
-          View Report
+        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200" disabled>
+          Report Unavailable
         </button>
       </div>
-
-      <div className="flex my-2">
-        <p className="mr-auto">
-          <span>2022-01-18 12:30PM</span><br/>
-          <span className="text-slate-500 text-sm">Completed 4 days ago</span>
-        </p>
-        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200">
-          View Report
-        </button>
-      </div>
-
-      <div className="flex my-2">
-        <p className="mr-auto">
-          <span>2022-01-18 12:30PM</span><br/>
-          <span className="text-slate-500 text-sm">Completed 4 days ago</span>
-        </p>
-        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200">
-          View Report
-        </button>
-      </div>
-      
+			))}
     </div>
-    
   </div>
 </div>
   )

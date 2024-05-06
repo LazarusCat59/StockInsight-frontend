@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { Sidebar } from '../Imports'
 import { Link } from 'react-router-dom';
 import { FaComputer } from "react-icons/fa6";
-import { getLocations } from '../../apicalls';
+import { getChoices } from '../../apicalls';
 import { useContext } from 'react';
 import { authContext, LoginDetails } from "../../App";
-import { LabLocation } from '../../apicalls';
+import { Choices } from '../../apicalls';
 
 const Locations = () => 
   
 {
 	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
-	const [locations, setLocations] = useState<Array<LabLocation>>([]);
+	const [locations, setLocations] = useState<Array<Choices>>([]);
 
 	useEffect(() => {
-		getLocations(loginToken).then(
+		getChoices(loginToken, 1).then(
 			loc => {
 				if(typeof loc !== 'undefined') {
-					setLocations(loc.locations);
+					setLocations(loc.results);
 				}
 			})
 		}, []);
