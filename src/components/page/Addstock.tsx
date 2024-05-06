@@ -16,11 +16,11 @@ const Addstock = () => {
         <div className='flex justify-center w-[85rem] mt-3'>
           <div className='bg-slate-200 border rounded-full h-36 w-36'></div>
         </div>  
-        <div className='flex justify-center items-center w-[85rem] mt-7'>
+        <div className='flex justify-center items-center w-[85rem] '>
        <Inputbox ph="stock name" tag="Name : " />
        </div>
 
-      <div className='mx-80 mt-5'>
+      <div className='mx-80 mt-2'>
         <h1 className='text-xl font-semibold  '> Stock Details:</h1>
         <div className='flex '>
           <div className='mr-36'>

@@ -1,17 +1,27 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { Sidebar } from '../Imports';
 
+
+
+  
 const AddUser = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+  
 	return (
-<div>
+<div className='flex'>
   <Sidebar/>
-  <h2 className="text-4xl font-boldtext-black dark:text-gray-100 mx-60">
+ <div className=' w-screen'>
+ <h2 className="text-4xl font-boldtext-black dark:text-gray-800 mx-60">
     Users
   </h2>
-  <h3 className="my-4 text-lg text-gray-600 dark:text-gray-300 mx-60">
+  <h3 className="my-4 text-lg text-gray-600 dark:text-gray-800 mx-60">
     Manage who can View and edit the stock management system
   </h3>
-  <form className="max-w-screen-lg mx-auto">
+  <form className="w-[55rem] ml-60">
     <label
       htmlFor="default-search"
       className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -39,11 +49,11 @@ const AddUser = () => {
       <input
         type="search"
         id="default-search"
-        className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="block w-[54rem] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Search For Users"
       />
     </div>
-  </form>
+    </form>
   <div className="mx-60 mt-5 ">
     <div className=" p-5 h-16  border flex justify-between ">
       <div>
@@ -53,7 +63,7 @@ const AddUser = () => {
       <div>Permissions</div>
     </div>
     <div className=" p-5 h-16  border flex justify-between">
-      <div>
+      <div >
         {" "}
         <i className="ri-user-line" /> Head Of Department
       </div>
@@ -74,10 +84,10 @@ const AddUser = () => {
       <div>View stock info</div>
     </div>
   </div>
-  <h1 className="mx-60 mt-5  mb-5 font-bold text-3xl">Add Or Remove Users </h1>
+  <h1 className="mx-60 mt-5  font-bold text-3xl">Add Or Remove Users </h1>
   <label
     htmlFor="input-group-1"
-    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white mx-60"
+    className="block  text-sm font-medium text-gray-900 dark:text-white mx-60"
   >
     Email
   </label>
@@ -101,66 +111,54 @@ const AddUser = () => {
       placeholder="name@gmail.com"
     />
   </div>
-  <div className="relative mx-60">
-    <button
-      id="dropdownHoverButton"
-      data-dropdown-toggle="dropdownHover"
-      data-dropdown-trigger="hover"
-      className="text-white w-80 mb-5 bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
-      type="button"
-    >
-      User Type
-      <svg
-        className="w-2.5 h-2.5 ml-3"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 10 6"
+  <div className=' flex ml-[13.6rem] mb-5 mt-2'>
+
+      <div className="relative inline-block text-left">
+      <button
+        id="dropdownHoverButton"
+        onClick={toggleDropdown}
+        className="text-white bg-gradient-to-r mx-[11rem] from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  ml-5 px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-64"
+        type="button"
       >
-        <path
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="m1 1 4 4 4-4"
-        />
-      </svg>
-    </button>
-    <div
-      id="dropdownHover"
-      className="absolute z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 -mt-1"
-    >
-      <ul
-        className="py-2 text-sm text-gray-700 dark:text-gray-200"
-        aria-labelledby="dropdownHoverButton"
-      >
-        <li>
-          <a
-            href="#"
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            Head Of Department
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            Stock Auditor
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            Stock Custodian
-          </a>
-        </li>
-      </ul>
+        Add User
+        <svg
+          className={`w-2.5 ml-[9rem] h-2.5 ms-3 ${isOpen ? 'transform rotate-180' : ''}`}
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 10 6"
+        >
+          <path
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="m1 1 4 4 4-4"
+          />
+        </svg>
+      </button>
+      {isOpen && (
+        <div
+          id="Condition"
+          className="absolute z-10 w-64 bg-white divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700"
+        >
+          <ul className="py-2 text-sm  text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+           
+            <li>
+              <a href="#" className="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              Custodian
+              </a>
+            </li>
+            <li>
+              <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+               Auditor
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
-  </div> 
+      </div>
   <button
     type="button"
     className="text-white bg-gradient-to-r mx-60 from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
@@ -173,6 +171,7 @@ const AddUser = () => {
   >
     Remove User
   </button>
+ </div>
 </div>
 	)
 }
