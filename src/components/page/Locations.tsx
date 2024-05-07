@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Sidebar } from '../Imports'
 import { Link } from 'react-router-dom';
 import { FaComputer } from "react-icons/fa6";
-import { getChoices } from '../../apicalls';
 import { useContext } from 'react';
-import { authContext, LoginDetails } from "../../App";
-import { Choices } from '../../apicalls';
+import { authContext } from "../../App";
+import { getChoices } from '../../apicalls';
+import { Choices, LoginDetails } from '../../types';
 
 const Locations = () => 
   

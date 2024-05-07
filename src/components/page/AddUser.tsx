@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import { Sidebar } from '../Imports';
-
-interface User {
-  email: string;
-  username: string;
-  role: string;
-}
+import { User } from '../../types';
 
 const AddUser = () => {
   const [selectedRole, setSelectedRole] = useState('');
@@ -100,8 +95,8 @@ const AddUser = () => {
             onChange={(e) => setSelectedRole(e.target.value)}
           >
             <option  value="">Select Role</option>
-            <option  value="Custodian">Custodian</option>
-            <option  value="Auditor">Auditor</option>
+            <option  value="CDN">Custodian</option>
+            <option  value="ADT">Auditor</option>
           </select>
         </div>
 

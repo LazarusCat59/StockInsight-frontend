@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { authContext, LoginDetails } from "../../App";
+import { authContext } from "../../App";
+import { LoginDetails } from "../../types";
 
 import React from 'react'
 

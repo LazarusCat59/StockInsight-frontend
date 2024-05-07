@@ -2,13 +2,14 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Sidebar , Header} from '../Imports'
 import { FaComputer } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
-import { AuditDetails, getAuditList, isAudit } from '../../apicalls';
-import { LoginDetails, authContext } from '../../App';
+import { getAuditList } from '../../apicalls';
+import { authContext } from '../../App';
+import { Audit, isAudit, LoginDetails } from '../../types';
 
-const Audit = () => {
+const AuditPage = () => {
 	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
 
-	const [audits, setAudits] = useState<Array<AuditDetails>>([{
+	const [audits, setAudits] = useState<Array<Audit>>([{
 		id: 0,
 		url: '',
 		auditor_name: '',
@@ -28,7 +29,7 @@ const Audit = () => {
 		getAuditList(loginToken).then(adtlist => {
 			if(typeof adtlist !== 'undefined') {
 				
-				function isArrayOfAudits(audits: unknown): audits is AuditDetails[] {
+				function isArrayOfAudits(audits: unknown): audits is Audit[] {
 					return Array.isArray(audits) && audits.every(item => isAudit(item));
 				}
 				if(isArrayOfAudits(adtlist.results)) {
@@ -52,8 +53,6 @@ const Audit = () => {
         placeholder="Search by product name or Location"
       />
     </div>
-    
-
     <div className="container mx-auto mt-6">
       <h1 className="text-xl font-extrabold mb-1">Recent Audits</h1>
 			{audits.map((item, index) => (
@@ -73,7 +72,5 @@ const Audit = () => {
   )
 }
 
-
-export default Audit 
+export default AuditPage;
 export {};
-

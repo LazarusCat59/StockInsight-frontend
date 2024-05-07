@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { authContext, LoginDetails } from '../../App'
+import { authContext } from '../../App'
 import { Sidebar } from '../Imports'
-import { getChoices, getStock, Choices, getAudit } from '../../apicalls';
+import { getChoices, getStock, getAudit } from '../../apicalls';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Choices, LoginDetails } from '../../types';
 
 const StockView = () => {
 	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
@@ -21,7 +22,7 @@ const StockView = () => {
   }
 
   const [name, setName] = useState('');
-  const [type, setType] = useState('');
+  const [category, setCategory] = useState('');
   const [itemCode, setItemCode] = useState('');
   const [billNo, setBillNo] = useState('');
   const [purchaseDate, setPurchaseDate] = useState('');
@@ -40,9 +41,7 @@ const StockView = () => {
 				setItemCode(stock.item_code);
 				setBillNo(stock.bill_no);
 				setPurchaseDate(stock.purchase_date);
-				if(stock.type !== null) {
-					setType(stock.type);
-				}
+				setCategory(stock.category);
 				if(stock.description !== null) {
 					setDescription(stock.description);
 				} 

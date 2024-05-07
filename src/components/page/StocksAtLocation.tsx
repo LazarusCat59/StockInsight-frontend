@@ -3,8 +3,9 @@ import { Sidebar } from '../Imports'
 import { Link, useParams } from 'react-router-dom';
 import { FaComputer } from "react-icons/fa6";
 import { useContext } from 'react';
-import { authContext, LoginDetails } from "../../App";
-import { Stock, getStockList, isStock } from '../../apicalls';
+import { authContext } from "../../App";
+import { getStockList } from '../../apicalls';
+import { Stock, isStock, LoginDetails } from '../../types';
 
 const StocksAtLocation = () => {
 	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
