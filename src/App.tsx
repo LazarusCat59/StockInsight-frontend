@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate, useLocation } from 'react-router-dom';
 import { Sidebar, Home, Mainpage, Login, Footer, Request, Logout, Audit, 
 	AddUser, Profile, Locations, NewAudit, Header, Stockaud, Auditsystem,
-	Addstock, StocksAtLocation, StockView } from './components/Imports';
+	Addstock, StocksAtLocation, StockView,Reportsto} from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 <source />
@@ -66,6 +66,7 @@ function RoutesLocation() {
 				<Route path ='/stockaud' element={<Stockaud/>} />
 				<Route path ='/auditsystem' element={<Auditsystem/>} />
 				<Route path ='/addstock' element={<Addstock/>} />
+				<Route path ='/reportsto' element={<Reportsto/>} />
       </Routes>
     </>
   );

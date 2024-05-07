@@ -149,7 +149,7 @@ const Addstock = () => {
 
           </div>
           <div className='mt-5 ml-[20.5rem]'>
-            <button
+          <button
               type="button"
               className="text-white bg-gradient-to-r from-cyan-500  to-blue-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 w-[10rem] py-2.5 text-center me-2 mb-2"
               onClick={handleSubmit} // Add onClick handler to call handleSubmit function
