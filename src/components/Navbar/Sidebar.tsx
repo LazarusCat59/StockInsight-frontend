@@ -8,6 +8,8 @@ import { AiOutlineAudit } from "react-icons/ai";
 import { BiMessageEdit } from "react-icons/bi";
 import { GoHistory } from "react-icons/go";
 import { IoMdSettings,IoMdLogOut } from "react-icons/io";
+import { FaLocationDot } from "react-icons/fa6";
+import { MdPostAdd } from "react-icons/md";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -15,9 +17,10 @@ const Navbar = () => {
   const handleMouseLeave = () => { setOpen(false); };
   const Menus = [
     { title: "Dashboard", path: "/" },
-    { title: "Reports", icon: <FaChartLine />, path: "/reports" },
     { title: "Audits", icon: <AiOutlineAudit />, path: "/audit" },
+    { title: "Add Stock", icon: <MdPostAdd />, path: "/Addstock" },
     { title: "Requests", icon: <BiMessageEdit />, spacing: true, path: "/request" },
+    { title: "Locations", icon: <FaLocationDot />, path: "/locations" },
     { title: "Settings", icon: <IoMdSettings />, spacing: true, path: "/settings" }
   ];
 

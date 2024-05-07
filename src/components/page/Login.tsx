@@ -41,6 +41,7 @@ const Login = () => {
 			if(typeof token !== "undefined") {
 				setLoginToken(token);
 				setNeedsRedirect(true);
+        routeChange();
 			} else {
 				console.error("Login failed");
 			}
@@ -49,7 +50,7 @@ const Login = () => {
 
 	if(needsRedirect) {
 		return (
-		<Navigate replace to="/request"/>
+		<Navigate replace to="/locations"/>
 		);
 	} else {
   return (

@@ -2,13 +2,22 @@ import React, { useState } from 'react'
 import { Sidebar } from '../Imports'
 import Inputbox from '../elements/Inputbox'
 import But from '../elements/But';
+import { AnySrvRecord } from 'dns';
 
 const Addstock = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('Condition');
+
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+  
+  const handleOptionClick = (option:any) => {
+    setSelectedOption(option);
+  };
+
+  
   return (
     <div className='flex' >
       <Sidebar/>
@@ -55,59 +64,60 @@ const Addstock = () => {
 
         </div>
 
-        <div className=' flex ml-[4rem] mt-10'>
-      <h1 className=' text-xl font-semibold'>Condition :</h1>
+        <div className='flex ml-[4rem] mt-10'>
+  <h1 className='text-xl font-semibold'>Condition :</h1>
 
-      <div className="relative inline-block text-left">
-      <button
-        id="dropdownHoverButton"
-        onClick={toggleDropdown}
-        className="text-white bg-gradient-to-r mx-[11rem] from-cyan-500 to-blue-500 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-40 ml-5 px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button"
+  <div className="relative inline-block text-left">
+    <button
+      id="dropdownHoverButton"
+      onClick={toggleDropdown}
+      className="text-white bg-gradient-to-r mx-[11rem] from-cyan-500 to-blue-500 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-40 ml-5 px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      type="button"
+    >
+      {selectedOption}
+      <svg
+        className={`w-2.5 ml-12 h-2.5 ms-3 ${isOpen ? 'transform rotate-180' : ''}`}
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 10 6"
       >
-        Condition
-        <svg
-          className={`w-2.5 ml-12 h-2.5 ms-3 ${isOpen ? 'transform rotate-180' : ''}`}
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 10 6"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m1 1 4 4 4-4"
-          />
-        </svg>
-      </button>
-      {isOpen && (
-        <div
-          id="Condition"
-          className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-        >
-          <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
-            <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                  Good
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+        <path
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="m1 1 4 4 4-4"
+        />
+      </svg>
+    </button>
+    {isOpen && (
+      <div
+        id="Condition"
+        className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+      >
+        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+          <li>
+            <a href="#" className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white`} onClick={() => handleOptionClick('Good')} >
+              Good
+            </a>
+          </li>
+          <li>
+            <a href="#" className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white`} onClick={() => handleOptionClick('Bad')} >
               Bad
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Average
-              </a>
-            </li>
-          </ul>
-        </div>
-      )}
-    </div>
+            </a>
+          </li>
+          <li>
+            <a href="#" className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white`} onClick={() => handleOptionClick('Average')} >
+              Average
+            </a>
+          </li>
+        </ul>
       </div>
+    )}
+  </div>
+</div>
+
    
       </div>
       <div className='mt-5 ml-[24.5rem]'>
@@ -126,3 +136,4 @@ const Addstock = () => {
 }
 
 export default Addstock
+export{};

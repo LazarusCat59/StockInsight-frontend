@@ -51,7 +51,7 @@ function RoutesLocation() {
       <Routes>
         <Route path ='/' element={ loginToken ? <Home/> : <Mainpage/>} />
         <Route path ='/request' element={ loginToken ? <Request/> : <Navigate to='/login'/>} />
-				<Route path ='/login' element={ loginToken ? <Navigate to='/'/> : <Login/>}/>
+				<Route path ='/login' element={ loginToken ? <Navigate to='/locations'/> : <Login/>}/>
 				<Route path ='/logout' element={ loginToken ? <Logout/> : <Navigate to='/'/>} />
 				<Route path ='/audit' element={<Audit/>} />
 				<Route path ='/adduser' element={<AddUser/>} />
@@ -63,9 +63,9 @@ function RoutesLocation() {
 				<Route path="/stocks/:stockId" element={<StockView/>}/>
 				<Route path="/audit/:stockId" element={<NewAudit/>}/>
 				<Route path="/newaudit" element={<NewAudit />} />
-				<Route path ='/Stockaud' element={<Stockaud/>} />
-				<Route path ='/Auditsystem' element={<Auditsystem/>} />
-				<Route path ='/Addstock' element={<Addstock/>} />
+				<Route path ='/stockaud' element={<Stockaud/>} />
+				<Route path ='/auditsystem' element={<Auditsystem/>} />
+				<Route path ='/addstock' element={<Addstock/>} />
       </Routes>
     </>
   );

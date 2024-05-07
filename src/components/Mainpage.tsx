@@ -34,9 +34,8 @@ const Mainpage = () => {
             <div className="mb-8 text-3xl font-bold">Albertian Institute of Science and Technology (AISAT)</div>
             <div className="mb-6 text-xl">Login</div>
             <div className="flex flex-col space-y-4">
-              <button className="w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-700" onClick={routeChange}>HOD Login</button>
-              <button className="w-full rounded-md bg-green-500 px-4 py-2 text-white hover:bg-green-700" onClick={routeChange}>Auditor Login</button>
-              <button className="w-full rounded-md bg-purple-500 px-4 py-2 text-white hover:bg-purple-700" onClick={routeChange}>Custodian Login</button>
+              <button className="w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-700" onClick={routeChange}>LOGIN</button>
+              
             </div>
           </div>
         </body>
