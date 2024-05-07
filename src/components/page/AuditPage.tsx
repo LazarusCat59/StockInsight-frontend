@@ -2,13 +2,14 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Sidebar , Header} from '../Imports'
 import { FaComputer } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
-import { getAuditList } from '../../apicalls';
+import { getAudit, getAuditedStocks } from '../../apicalls';
 import { authContext } from '../../App';
-import { Audit, isAudit, LoginDetails } from '../../types';
+import { Audit, isAudit, isArrayOfAudits, isArrayOfStocks, LoginDetails } from '../../types';
 
 const AuditPage = () => {
 	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
 
+	const [ stockIds, setStockIds ] = useState([0]);
 	const [audits, setAudits] = useState<Array<Audit>>([{
 		id: 0,
 		url: '',
@@ -20,31 +21,42 @@ const AuditPage = () => {
 	}]);
 
   let navigate = useNavigate(); 
-  const routeChange = () =>{ 
-    let path = `/locations/LAB_1`; 
+  const routeChange = (path: string) =>{ 
+    // let path = `/reports/${id}`; 
     navigate(path);
   }
 
 	useEffect(() => {
-		getAuditList(loginToken).then(adtlist => {
-			if(typeof adtlist !== 'undefined') {
-				
-				function isArrayOfAudits(audits: unknown): audits is Audit[] {
-					return Array.isArray(audits) && audits.every(item => isAudit(item));
-				}
-				if(isArrayOfAudits(adtlist.results)) {
-					setAudits(adtlist.results);
+		let stkIds: Array<number> = []
+		let adts: Array<Audit> = [];
+		getAuditedStocks(loginToken).then(stocklist => {
+			if(stocklist !== undefined) {
+				if(isArrayOfStocks(stocklist.results)) {
+					stocklist.results.forEach(item => {
+						stkIds.push(item.id);
+						if(item.audit_details !== null) {
+							getAudit(loginToken, item.audit_details).then(audit => {
+								if(audit !== undefined) {
+									adts.push(audit)
+								}
+							});
+						}
+					});
 				}
 			}
 		});
+
+		setAudits(adts);
+		setStockIds(stkIds);
 	}, []);
+
 	return (
 <div className="flex">
   <Sidebar />
   <div className="flex flex-col w-full p-4">
     <div className="container mx-auto mt-8 flex">
       <h1 className="font-extrabold text-3xl mr-auto">Stock Audits</h1>
-      <button className={`hover:outline outline-slate-200 rounded-xl ml-auto bg-slate-200 hover:bg-slate-300 px-4`} onClick={routeChange}>New Audit</button>
+      <button className={`hover:outline outline-slate-200 rounded-xl ml-auto bg-slate-200 hover:bg-slate-300 px-4`} onClick={() => routeChange(`/locations`)}>New Audit</button>
     </div>
     <div className="container mx-auto mt-8">
       <input
@@ -61,8 +73,8 @@ const AuditPage = () => {
           <span>{item.time}</span><br/>
           <span className="text-slate-500 text-sm">Completed</span>
         </p>
-        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200" disabled>
-          Report Unavailable
+        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200" onClick={() => routeChange(`/reports/${stockIds[index]}`)}>
+          View Report
         </button>
       </div>
 			))}

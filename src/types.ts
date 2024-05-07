@@ -108,3 +108,11 @@ export function isUser(user: any): user is User {
 export function isChoiceList(choicelist: any): choicelist is ChoicesList {
 	return (choicelist as ChoicesList).length !== undefined;
 }
+
+export function isArrayOfAudits(audits: unknown): audits is Audit[] {
+	return Array.isArray(audits) && audits.every(item => isAudit(item));
+}
+
+export function isArrayOfStocks(stocks: unknown): stocks is Stock[] {
+	return Array.isArray(stocks) && stocks.every(item => isAudit(item));
+}

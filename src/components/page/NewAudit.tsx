@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { authContext } from '../../App'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Sidebar } from '../Imports'
-import { getStock, getChoices, createAudit } from '../../apicalls';
+import { getStock, getChoices, createAudit, deleteAudit } from '../../apicalls';
 import { LoginDetails, Choices } from '../../types';
 
 const NewAudit = () => {
@@ -14,6 +14,7 @@ const NewAudit = () => {
   const [billNo, setBillNo] = useState('');
   const [purchaseDate, setPurchaseDate] = useState('');
   const [description, setDescription] = useState('');
+	const [auditdetail, setAuditdetail] = useState('');
 
 	const [condition, setCondition] = useState('');
 	const [remarks, setRemarks] = useState('');
@@ -44,6 +45,7 @@ const NewAudit = () => {
     // console.log('Description:', description);
 
 		createAudit(loginToken, Number(stockId), condition, remarks);
+		deleteAudit(loginToken, auditdetail);
 		routeChange();
   };
 
@@ -59,12 +61,13 @@ const NewAudit = () => {
 				setItemCode(stock.item_code);
 				setBillNo(stock.bill_no);
 				setPurchaseDate(stock.purchase_date);
-				if(stock.category !== null) {
-					setCategory(stock.category);
-				}
+				setCategory(stock.category);
 				if(stock.description !== null) {
 					setDescription(stock.description);
 				} 
+				if(stock.audit_details !== null) {
+					setAuditdetail(stock.audit_details);
+				}
 			}
 		});
 
@@ -125,7 +128,7 @@ const NewAudit = () => {
   </div>
   <div className="mb-5 grid grid-cols-2 pb-5">
 	<select className="mx-10 rounded text-center bg-white" onChange={(e) => setCondition(e.target.value)}>
-		<option value="">Select Condition</option>
+		<option value="">-- Select Condition --</option>
 	{APIConditions.map((item, index) => (
 		<option key={index} value={item.code}>{item.name}</option>
 		))}
