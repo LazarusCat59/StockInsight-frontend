@@ -1,8 +1,9 @@
 import React, { useEffect, useContext } from 'react';
 import { Sidebar } from '../Imports';
 import { useState } from 'react';
-import { getChoices, Choices } from '../../apicalls';
-import { authContext, LoginDetails } from '../../App';
+import { getChoices } from '../../apicalls';
+import { authContext } from '../../App';
+import { Choices, LoginDetails } from '../../types';
 
 
 

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { getLoginToken } from '../../apicalls';
-import { authContext, LoginDetails } from '../../App';
+import { authContext } from '../../App';
+import { LoginDetails } from '../../types';
 import { Navigate,Route,useNavigate } from 'react-router-dom';
 import path from 'path';
 import Mainpage from '../Mainpage';

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { authContext, LoginDetails } from '../../App'
+import { authContext } from '../../App'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Sidebar } from '../Imports'
-import { getStock, getChoices, Choices, setAudit } from '../../apicalls';
+import { getStock, getChoices, createAudit } from '../../apicalls';
+import { LoginDetails, Choices } from '../../types';
 
 const NewAudit = () => {
 	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
 
   const [name, setName] = useState('');
-  const [type, setType] = useState('');
+  const [category, setCategory] = useState('');
   const [itemCode, setItemCode] = useState('');
   const [billNo, setBillNo] = useState('');
   const [purchaseDate, setPurchaseDate] = useState('');
@@ -42,7 +43,7 @@ const NewAudit = () => {
     // console.log('Purchase Date:', purchaseDate);
     // console.log('Description:', description);
 
-		setAudit(loginToken, Number(stockId), condition, remarks);
+		createAudit(loginToken, Number(stockId), condition, remarks);
 		routeChange();
   };
 
@@ -58,8 +59,8 @@ const NewAudit = () => {
 				setItemCode(stock.item_code);
 				setBillNo(stock.bill_no);
 				setPurchaseDate(stock.purchase_date);
-				if(stock.type !== null) {
-					setType(stock.type);
+				if(stock.category !== null) {
+					setCategory(stock.category);
 				}
 				if(stock.description !== null) {
 					setDescription(stock.description);
@@ -124,6 +125,7 @@ const NewAudit = () => {
   </div>
   <div className="mb-5 grid grid-cols-2 pb-5">
 	<select className="mx-10 rounded text-center bg-white" onChange={(e) => setCondition(e.target.value)}>
+		<option value="">Select Condition</option>
 	{APIConditions.map((item, index) => (
 		<option key={index} value={item.code}>{item.name}</option>
 		))}

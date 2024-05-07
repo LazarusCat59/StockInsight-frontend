@@ -1,95 +1,18 @@
 import axios, { AxiosResponse } from 'axios'
+import { isAPIError, isList, isUser, isAudit, isStock,
+	isToken, isChoice, isChoiceList, isComputer, isLoginError,
+	APIError, List, User, Audit, Stock, Token, Choices, ChoicesList,
+	Computer, LoginError} from './types'
 
-interface LoginError {
-	non_field_errors: Array<string>;
-}
-
-interface APIError {
-	detail: string;
-};
-
-interface Token {
-	token: string;
-};
-
-export interface User {
-	username: string;
-	email: string;
-	role: string;
-}
-
-export interface Stock {
-	id: number;
-	url: string;
-	name: string;
-	description: string | null;
-	item_code: string;
-	bill_no: string;
-	purchase_date: string;
-	location: string;
-	audit_details: string | null;
-	type: string | null;
-}
-
-export interface StockType {
-	id: number;
-	url: string;
-	name: string;
-	category: string;
-}
-
-export interface AuditDetails {
-	id: number;
-	url: string;
-	auditor_name: string;
-	time: string;
-	condition: string;
-	remarks: string | null;
-	auditor: string | null;
-}
-
-export interface Computer {
-	id: number;
-	url: string;
-	name: string;
-	keyboard: string;
-	mouse: string;
-	cpu: string;
-	monitor: string;
-}
-
-export interface List {
-	count: number;
-	next: string | null;
-	previous: string | null;
-	results: Array<Stock | AuditDetails | StockType | Computer>;
-}
-
-export interface Choices {
-	code: string;
-	name: string;
-}
-
-interface ChoicesList {
-	length: number;
-	results: Array<Choices>;
-}
-
-
-function isAPIError(err: any): err is APIError {
-	return (err as APIError).detail !== undefined;
-}
-
-function isLoginError(err: any): err is LoginError {
-	return (err as LoginError).non_field_errors !== undefined;
-}
-
-export function isStock(stock: any): stock is Stock {
-	return (stock as Stock).name !== undefined;
-}
-
-export function isAudit(audit: any): audit is AuditDetails {
-	return (audit as AuditDetails).auditor_name !== undefined;
+function catchErrors(data: any): any {
+	if(typeof data === "undefined") {
+		return;
+	} else if(isAPIError(data)) {
+		console.error(data.detail);
+		return;
+	}
+	
+	return data;
 }
 
 async function makeRequest(type: string, url: string, reqdata: any, config?: any): Promise<any> {
@@ -128,14 +51,11 @@ async function makeRequest(type: string, url: string, reqdata: any, config?: any
 export async function getLoginToken(uname: string, pwd: string): Promise<string | undefined> {
 	let data: LoginError | Token | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/login/", { username: uname, password: pwd });
 	
-	if(typeof data === "undefined") {
-		return;
-	} else if (isLoginError(data)) {
-		console.error(data.non_field_errors[0]);
-		return;
-	}
+	let checked_data = catchErrors(data);
 
-	return data.token;
+	if(isToken(checked_data)) {
+		return checked_data.token;
+	}
 }
 
 export async function getStockList(token: string, name: string, location: string): Promise<List | undefined> {
@@ -151,44 +71,21 @@ export async function getStockList(token: string, name: string, location: string
 		data = await makeRequest("GET", "http://127.0.0.1:8000/api/stock_list/", { headers: { "Authorization" : `Token ${token}` }});
 	}
 
-	// console.log(data);
+	let checked_data = catchErrors(data);
 
-	if(typeof data === "undefined") {
-		return;
-	} else if(isAPIError(data)) {
-		console.error(data.detail);
-		return;
+	if(isList(checked_data)) {
+		return checked_data;
 	}
-
-	return data;
 }
 
 export async function getComputerList(token: string): Promise<List | undefined> {
 	let data: APIError | List | undefined = await makeRequest("GET", "http://127.0.0.1:8000/api/computer_list/", { headers: { "Authorization" : `Token ${token}` }});
-	// console.log(data);
 
-	if(typeof data === "undefined") {
-		return;
-	} else if(isAPIError(data)) {
-		console.error(data.detail);
-		return;
+	let checked_data = catchErrors(data);
+
+	if(isList(checked_data)) {
+		return checked_data;
 	}
-
-	return data;
-}
-
-export async function createUser(token: string, uname: string, pwd: string, email: string, role:string): Promise<User | undefined> {
-	let data: APIError | User | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/register/", { username: uname, password: pwd, email: email, role: role}, { headers: { "Authorization" : `Token ${token}` }});
-	// console.log(data);
-
-	if(typeof data === "undefined") {
-		return;
-	} else if(isAPIError(data)) {
-		console.error(data.detail);
-		return;
-	}
-
-	return data;
 }
 
 export async function getChoices(token: string, choice: number): Promise<ChoicesList | undefined> {
@@ -203,76 +100,44 @@ export async function getChoices(token: string, choice: number): Promise<Choices
 			console.error("Invalid choice");
 			return;
 	}
-	// console.log(data);
 
-	if(typeof data === "undefined") {
-		return;
-	} else if(isAPIError(data)) {
-		console.error(data.detail);
-		return;
+	let checked_data = catchErrors(data);
+
+	if(isChoiceList(checked_data)) {
+		return checked_data;
 	}
-
-	return data;
 }
 
 export async function getStock(token: string, id: number | string): Promise<Stock | undefined> {
-	let data: APIError | Stock | undefined;
-	if(typeof id === 'number') {
+	let data: APIError | Audit | undefined;
+
+	if(typeof id === 'string') {
+		data = await makeRequest("GET", id, { headers: { "Authorization" : `Token ${token}` }});
+	} else {
 		data = await makeRequest("GET", `http://127.0.0.1:8000/api/stock/${id}/`, { headers: { "Authorization" : `Token ${token}` }});
-	} else {
-		data = await makeRequest("GET", id, { headers: { "Authorization" : `Token ${token}` }});
 	}
 
-	if(typeof data === "undefined") {
-		return;
-	} else if(isAPIError(data)) {
-		console.error(data.detail);
-		return;
-	}
-
-	return data;
-}
-
-export async function getAudit(token: string, id: number | string): Promise<AuditDetails | undefined> {
-	let data: APIError | AuditDetails | undefined;
-	if(typeof id === 'number') {
-		data = await makeRequest("GET", `http://127.0.0.1:8000/api/audit/${id}/`, { headers: { "Authorization" : `Token ${token}` }});
-	} else {
-		data = await makeRequest("GET", id, { headers: { "Authorization" : `Token ${token}` }});
-	}
-
-	if(typeof data === "undefined") {
-		return;
-	} else if(isAPIError(data)) {
-		console.error(data.detail);
-		return;
-	}
-
-	return data;
-}
-
-export async function setAudit(token: string, stockId: number, condition: string, remarks: string) {
-	console.log(condition, remarks);
-	let data: APIError | AuditDetails | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/audit_create/", { condition: condition, remarks: remarks}, { headers: { "Authorization" : `Token ${token}` } });
+	let checked_data = catchErrors(data);
 	
-	if(typeof data === "undefined") {
-		return;
-	} else if(isAPIError(data)) {
-		console.error(data.detail);
-		return;
+	if(isStock(checked_data)) {
+		return checked_data;
+	}
+}
+
+export async function getAudit(token: string, id: number | string): Promise<Audit | undefined> {
+	let data: APIError | Audit | undefined;
+
+	if(typeof id === 'string') {
+		data = await makeRequest("GET", id, { headers: { "Authorization" : `Token ${token}` }});
+	} else {
+		data = await makeRequest("GET", `http://127.0.0.1:8000/api/audit/${id}/`, { headers: { "Authorization" : `Token ${token}` }});
 	}
 
-	console.log(data.url);
-	let stock: APIError | Stock | undefined = await makeRequest("PATCH", `http://127.0.0.1:8000/api/stock/${stockId}/`, { audit_details: data.url },{ headers: { "Authorization" : `Token ${token}` }});
-		
-	if(typeof stock === "undefined") {
-		return;
-	} else if(isAPIError(stock)) {
-		console.error(stock.detail);
-		return;
-	}
+	let checked_data = catchErrors(data);
 
-	return data;
+	if(isAudit(checked_data)) {
+		return checked_data;
+	}
 }
 
 export async function getAuditList(token: string): Promise<List | undefined> {
@@ -280,14 +145,59 @@ export async function getAuditList(token: string): Promise<List | undefined> {
 
 	data = await makeRequest("GET", "http://127.0.0.1:8000/api/audit_list/", { headers: { "Authorization" : `Token ${token}` }});
 
-	// console.log(data);
-
-	if(typeof data === "undefined") {
-		return;
-	} else if(isAPIError(data)) {
-		console.error(data.detail);
-		return;
+	let checked_data = catchErrors(data);
+	
+	if(isList(checked_data)) {
+		return checked_data;
 	}
+}
 
-	return data;
+export async function getCurrentUser(token: string): Promise<User | undefined> {
+	let data: APIError | User | undefined = undefined
+
+	data = await makeRequest("GET", "http://127.0.0.1:8000/api/currentuser/", { headers: { "Authorization" : `Token ${token}` }});
+
+	let checked_data = catchErrors(data);
+	
+	if(isUser(checked_data)) {
+		return checked_data;
+	}
+}
+
+export async function createUser(token: string, uname: string, pwd: string, email: string, role:string): Promise<User | undefined> {
+	let data: APIError | User | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/register/", { username: uname, password: pwd, email: email, role: role}, { headers: { "Authorization" : `Token ${token}` }});
+
+	let checked_data = catchErrors(data);
+
+	if(isUser(checked_data)) {
+		return checked_data;
+	}
+}
+
+export async function createAudit(token: string, stockId: number, condition: string, remarks: string): Promise<Audit | undefined> {
+	let data: APIError | Audit | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/audit_create/", { condition: condition, remarks: remarks}, { headers: { "Authorization" : `Token ${token}` } });
+	
+	let checked_data = catchErrors(data);
+
+	if(isAudit(checked_data)) {
+		let stock: APIError | Stock | undefined = await makeRequest("PATCH", `http://127.0.0.1:8000/api/stock/${stockId}/`, { audit_details: checked_data.url }, { headers: { "Authorization" : `Token ${token}` }});
+
+		if (catchErrors(stock) === undefined) {
+			return;
+		}
+
+		return checked_data;
+	}
+}
+
+export async function createStock(token: string, name: string, category: string, description: string, item_code: string, bill_no: string, purchase_date: string, location: string) {
+	let data: APIError | Stock | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/audit_create/",
+		{ name: name, category: category, description: description, item_code: item_code, bill_no: bill_no, purchase_date: purchase_date, location: location },
+		{ headers: { "Authorization" : `Token ${token}` } });
+	
+	let checked_data = catchErrors(data);
+
+	if(isStock(checked_data)) {
+		return checked_data;
+	}
 }
