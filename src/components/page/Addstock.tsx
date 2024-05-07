@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Sidebar } from '../Imports'
 import Inputbox from '../elements/Inputbox'
 import But from '../elements/But';
@@ -7,6 +7,12 @@ import { AnySrvRecord } from 'dns';
 const Addstock = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('Condition');
+  const [type, setType] = useState('');
+  const [itemCode, setItemCode] = useState('');
+
+  useEffect(() => {
+    console.log(type)
+  },[type])
 
 
   const toggleDropdown = () => {
@@ -33,15 +39,15 @@ const Addstock = () => {
         <h1 className='text-xl font-semibold  '> Stock Details:</h1>
         <div className='flex '>
           <div className='mr-36'>
-          <Inputbox ph="type" tag="Type :"/>
+          <Inputbox ph="type" tag="Type :" type={type} setType={setType}/>
             <Inputbox ph="description" tag="Desc :"/>
-            <Inputbox ph="dd/mm/yyyy (Purchase Date)" tag="Date :"/>
+            <Inputbox ph="dd/mm/yyyy (Purchase Date)" tag="Date :" />
             </div>
             <div >
-            <Inputbox ph="item code" tag="Code :"/>
+            <Inputbox ph="item code" tag="Code :" />
             <Inputbox ph="bill number" tag="BillNo: "/>
             <div className='ml-5'>
-            <Inputbox ph="location" tag=" Loc : "/></div>
+            <Inputbox ph="location" tag=" Loc : " /></div>
             </div>
           <div>
           </div>

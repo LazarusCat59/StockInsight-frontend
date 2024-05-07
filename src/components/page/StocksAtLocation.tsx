@@ -34,8 +34,8 @@ const StocksAtLocation = () => {
   return (
     <div className="flex justify-start">
     <Sidebar />
-    <div>
-    <div className="container mx-auto mt-8 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 grid-flow-row">
+    <div className='px-16 mx-auto'>
+    <div className="container mx-auto mt-8 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-flow-row">
 		{stocks.map((item, index) => (
 		<div key={index} className="outline outline-gray-300 rounded mx-2 my-2 p-3 hover:bg-slate-300">
     <Link to={`/stocks/${item.id}`}>

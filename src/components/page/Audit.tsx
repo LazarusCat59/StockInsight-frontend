@@ -40,7 +40,7 @@ const Audit = () => {
 	return (
 <div className="flex">
   <Sidebar />
-  <div className="flex flex-col flex-1">
+  <div className="flex flex-col w-full p-4">
     <div className="container mx-auto mt-8 flex">
       <h1 className="font-extrabold text-3xl mr-auto">Stock Audits</h1>
       <button className={`hover:outline outline-slate-200 rounded-xl ml-auto bg-slate-200 hover:bg-slate-300 px-4`} onClick={routeChange}>New Audit</button>
