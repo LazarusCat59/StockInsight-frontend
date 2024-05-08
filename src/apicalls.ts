@@ -201,6 +201,8 @@ export async function createAudit(token: string, stockId: number, condition: str
 }
 
 export async function createStock(token: string, name: string, category: string, description: string, item_code: string, bill_no: string, purchase_date: string, location: string): Promise<Stock | undefined> {
+	let dataToSend = { name: name, category: category, description: description, item_code: item_code, bill_no: bill_no, purchase_date: purchase_date, location: location };
+	console.log(dataToSend);
 	let data: APIError | Stock | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/audit_create/",
 		{ name: name, category: category, description: description, item_code: item_code, bill_no: bill_no, purchase_date: purchase_date, location: location },
 		{ headers: { "Authorization" : `Token ${token}` } });

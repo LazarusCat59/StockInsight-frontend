@@ -83,9 +83,9 @@ const AuditPage = () => {
 		fetchAudits();
 	  }, []);
 
-	useEffect(() => {
-		console.log(audits);
-	}, [audits]);
+	// useEffect(() => {
+	// 	console.log(audits);
+	// }, [audits]);
 
 	return (
 <div className="flex">

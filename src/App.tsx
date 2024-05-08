@@ -56,14 +56,14 @@ function RoutesLocation() {
 				<Route path='/login' element={ loginToken ? <Navigate to='/locations'/> : <Login/>}/>
 				<Route path='/logout' element={ loginToken ? <Logout/> : <Navigate to='/'/>} />
 				<Route path='/audit' element={ loginToken ? <AuditPage/> : <Navigate to='/login'/>} />
-				<Route path='/adduser' element={ loginToken ? <AddUser/> : <Navigate to='/login'/>} />
+				<Route path='/adduser' element={ loginToken && userRole === 'HOD' ? <AddUser/> : <Navigate to='/login'/>} />
 				<Route path='/profile' element={ loginToken ? <Profile/>: <Navigate to='/login'/>} />
 				<Route path='/head' element={ loginToken ? <Header/>: <Navigate to='/login'/>} />
 				<Route path="/mainpage" element={ loginToken ? <Mainpage/>: <Navigate to='/login'/>}/>
 				<Route path="/locations" element={ loginToken ? <Locations/>: <Navigate to='/login'/>}/>
 				<Route path="/locations/:locationId" element={ loginToken ? <StocksAtLocation/>: <Navigate to='/login'/>}/>
 				<Route path="/stocks/:stockId" element={ loginToken ? <StockView/>: <Navigate to='/login'/>}/>
-				<Route path="/audit/:stockId" element={ (loginToken && (userRole === 'auditor' || userRole === 'hod' )) ? <NewAudit/>: <Navigate to='/login'/>}/>
+				<Route path="/audit/:stockId" element={ (loginToken && (userRole === 'ADT' || userRole === 'HOD' )) ? <NewAudit/>: <Navigate to='/login'/>}/>
 				<Route path='/stockaud' element={ loginToken ? <Stockaud/>: <Navigate to='/login'/>} />
 				<Route path='/auditsystem' element={ loginToken ? <Auditsystem/>: <Navigate to='/login'/>} />
 				<Route path='/addstock' element={ loginToken ? <Addstock/>: <Navigate to='/login'/>} />

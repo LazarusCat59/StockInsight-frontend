@@ -14,7 +14,7 @@ const NewAudit = () => {
   const [billNo, setBillNo] = useState('');
   const [purchaseDate, setPurchaseDate] = useState('');
   const [description, setDescription] = useState('');
-	const [auditdetail, setAuditdetail] = useState('');
+	const [auditDetail, setAuditDetail] = useState('');
 
 	const [condition, setCondition] = useState('');
 	const [remarks, setRemarks] = useState('');
@@ -44,8 +44,13 @@ const NewAudit = () => {
     // console.log('Purchase Date:', purchaseDate);
     // console.log('Description:', description);
 
+    if(!remarks) {
+      setRemarks(' ');
+    }
 		createAudit(loginToken, Number(stockId), condition, remarks);
-		deleteAudit(loginToken, auditdetail);
+    if(auditDetail) {
+      deleteAudit(loginToken, auditDetail);
+    }
 		routeChange();
   };
 
@@ -66,7 +71,7 @@ const NewAudit = () => {
 					setDescription(stock.description);
 				} 
 				if(stock.audit_details !== null) {
-					setAuditdetail(stock.audit_details);
+					setAuditDetail(stock.audit_details);
 				}
 			}
 		});
@@ -85,6 +90,10 @@ const NewAudit = () => {
 
 		setLoaded(true);
 	}, []);
+
+  useEffect(() => {
+    console.log(auditDetail);
+  }, [auditDetail])
 
   return (
     <div className="flex">
