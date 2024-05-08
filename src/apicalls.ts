@@ -153,13 +153,23 @@ export async function getAuditList(token: string): Promise<List | undefined> {
 }
 
 export async function getCurrentUser(token: string): Promise<User | undefined> {
-	let data: APIError | User | undefined = undefined
+	let data: APIError | User | undefined;
 
 	data = await makeRequest("GET", "http://127.0.0.1:8000/api/currentuser/", { headers: { "Authorization" : `Token ${token}` }});
 
 	let checked_data = catchErrors(data);
 	
 	if(isUser(checked_data)) {
+		return checked_data;
+	}
+}
+
+export async function getAuditedStocks(token: string): Promise<List | undefined> {
+	let data: APIError | List | undefined = await makeRequest("GET", "http://127.0.0.1:8000/api/auditedstocks/", { headers: { "Authorization" : `Token ${token}` }});
+
+	let checked_data = catchErrors(data);
+
+	if(isList(checked_data)) {
 		return checked_data;
 	}
 }
@@ -190,7 +200,9 @@ export async function createAudit(token: string, stockId: number, condition: str
 	}
 }
 
-export async function createStock(token: string, name: string, category: string, description: string, item_code: string, bill_no: string, purchase_date: string, location: string) {
+export async function createStock(token: string, name: string, category: string, description: string, item_code: string, bill_no: string, purchase_date: string, location: string): Promise<Stock | undefined> {
+	let dataToSend = { name: name, category: category, description: description, item_code: item_code, bill_no: bill_no, purchase_date: purchase_date, location: location };
+	console.log(dataToSend);
 	let data: APIError | Stock | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/audit_create/",
 		{ name: name, category: category, description: description, item_code: item_code, bill_no: bill_no, purchase_date: purchase_date, location: location },
 		{ headers: { "Authorization" : `Token ${token}` } });
@@ -201,3 +213,15 @@ export async function createStock(token: string, name: string, category: string,
 		return checked_data;
 	}
 }
+
+export async function deleteAudit(token: string, id: string | number) {
+	let data: APIError | undefined;
+	if(typeof id === 'string') {
+		data = await makeRequest("DELETE", id, { headers: { "Authorization" : `Token ${token}` }});
+	} else {
+		data = await makeRequest("DELETE", `https://127.0.0.1:8000/api/audit/${id}`, { headers: { "Authorization" : `Token ${token}` }});
+	}
+	
+	catchErrors(data);
+}
+

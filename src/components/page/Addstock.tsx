@@ -8,13 +8,13 @@ import { authContext } from '../../App';
 import { Choices, LoginDetails } from '../../types';
 
 const Addstock = () => {
-  const [selectedOption, setSelectedOption] = useState('Condition');
-  const [type, setType] = useState('');
+  const [condition, setCondition] = useState('');
+  const [category, setCategory] = useState('');
   const [itemCode, setItemCode] = useState('');
   const [desc, setdesc] = useState('');
   const [date, setDate] = useState(new Date());
   const [billNo, setbillNo] = useState('');
-  const [loc, setloc] = useState('');
+  const [loc, setLoc] = useState('');
   const [stockName, setstockName] = useState('');
   const [locations, setLocations] = useState<Array<Choices>>([{ name: '', code: '' }]);
   const [conditions, setConditions] = useState<Array<Choices>>([{ name: '', code: '' }]);
@@ -39,24 +39,34 @@ const Addstock = () => {
     });
   }, [loginToken]);
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    // handle select change logic here
-  };
-
-  const handleOptionClick = (option: any) => {
-    setSelectedOption(option);
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case 'category':
+        console.log("Here I am");
+        setCategory(value);
+        break;
+      case 'condition':
+        setCondition(value);
+        break;
+      case 'location':
+        setLoc(value);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleSubmit = () => {
     const formData = {
       stockName,
-      type,
+      category,
       desc,
       date,
       itemCode,
       billNo,
       loc,
-      conditions
+      condition
     };
 
 		// const dateTimeFormat = new Intl.DateTimeFormat('en-US', {
@@ -68,7 +78,9 @@ const Addstock = () => {
 		// const parts = dateTimeFormat.formatToParts(date);
 		// console.log(parts)
 		let purchasedate = date.toISOString().slice(0,10)
-		createStock(loginToken, stockName, categories[0].code, desc, itemCode, billNo, purchasedate, loc);
+		createStock(loginToken, stockName, category, desc, itemCode, billNo, purchasedate, loc).then(stock => {
+      console.log(stock)
+    })
 
     console.log(formData);
   };
@@ -99,9 +111,9 @@ const Addstock = () => {
               </div>
             </div>
             <div>
-      <div className=' flex mt-5 ml-9'>
+      <div className=' flex mt-5'>
               <h1 className='text-xl font-semibold'>Category:</h1>
-                <select name="location" id="location" className=" text-white bg-gradient-to-r mx-6 from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm ml-5  px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800bg-gray-50  focus:border-blue-500  h-12 w-56 p-5 appearance-none  border border-gray-300  focus:ring-opacity-75" onChange={handleSelectChange} >
+                <select name="category" id="location" className=" text-white bg-gradient-to-r mx-6 from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm ml-5  px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800bg-gray-50  focus:border-blue-500  h-12 w-56 p-5 appearance-none  border border-gray-300  focus:ring-opacity-75" onChange={handleSelectChange} >
 								<option value="">-- Select Category --</option>
                   {categories.map((item, index) => (
                     <option key={index} value={item.code}>
@@ -112,7 +124,7 @@ const Addstock = () => {
               </div>
               <div className='flex mt-5'>
               <h1 className='text-xl font-semibold'>Condition:</h1>
-                <select name="location" id="location" className=" text-white bg-gradient-to-r mx-6 from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  ml-2 px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800bg-gray-50  focus:border-blue-500  h-12 w-56 p-5 appearance-none  border border-gray-300  focus:ring-opacity-75" onChange={handleSelectChange} >
+                <select name="condition" id="location" className=" text-white bg-gradient-to-r mx-6 from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  ml-2 px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800bg-gray-50  focus:border-blue-500  h-12 w-56 p-5 appearance-none  border border-gray-300  focus:ring-opacity-75" onChange={handleSelectChange} >
 								<option value="">-- Select Condition --</option>
                   {conditions.map((item, index) => (
                     <option key={index} value={item.code}>

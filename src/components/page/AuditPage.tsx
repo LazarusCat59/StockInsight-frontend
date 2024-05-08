@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Sidebar , Header} from '../Imports'
+import { Sidebar } from '../Imports'
 import { FaComputer } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
-import { getAuditList } from '../../apicalls';
+import { getAudit, getAuditedStocks } from '../../apicalls';
 import { authContext } from '../../App';
-import { Audit, isAudit, LoginDetails } from '../../types';
+import { Audit, isArrayOfStocks, LoginDetails } from '../../types';
+import { isTemplateExpression } from 'typescript';
 
 const AuditPage = () => {
 	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
 
+	const [ stockIds, setStockIds ] = useState([0]);
 	const [audits, setAudits] = useState<Array<Audit>>([{
 		id: 0,
 		url: '',
@@ -20,31 +22,78 @@ const AuditPage = () => {
 	}]);
 
   let navigate = useNavigate(); 
-  const routeChange = () =>{ 
-    let path = `/locations/LAB_1`; 
+  const routeChange = (path: string) =>{ 
+    // let path = `/reports/${id}`; 
     navigate(path);
   }
 
+	// useEffect(() => {
+	// 	let stkIds: Array<number> = []
+	// 	let adts: Array<Audit> = [];
+	// 	getAuditedStocks(loginToken).then(stocklist => {
+	// 		if(stocklist !== undefined) {
+	// 			if(isArrayOfStocks(stocklist.results)) {
+	// 				stocklist.results.forEach(item => {
+	// 					stkIds.push(item.id);
+	// 					if(item.audit_details !== null) {
+	// 						getAudit(loginToken, item.audit_details).then(audit => {
+	// 							if(typeof audit !== 'undefined') {
+	// 								adts.push(audit)
+	// 								setAudits(adts);
+	// 							}
+	// 						});
+	// 					}
+	// 				});
+	// 			}
+	// 		}
+	// 		setStockIds(stkIds);
+	// 	});
+
+		
+	// }, []);
+
 	useEffect(() => {
-		getAuditList(loginToken).then(adtlist => {
-			if(typeof adtlist !== 'undefined') {
-				
-				function isArrayOfAudits(audits: unknown): audits is Audit[] {
-					return Array.isArray(audits) && audits.every(item => isAudit(item));
+		let stkIds: Array<number> = [];
+		const fetchAudits = async () => {
+		  const fetchedAudits: Array<Audit> = [];
+	  
+		  try {
+			const stocklist = await getAuditedStocks(loginToken);
+	  
+			if (stocklist !== undefined && isArrayOfStocks(stocklist.results)) {
+			  for (const item of stocklist.results) {
+				stkIds.push(item.id);
+	  
+				if (item.audit_details !== null) {
+				  const audit = await getAudit(loginToken, item.audit_details);
+				  if (typeof audit !== 'undefined') {
+					fetchedAudits.push(audit);
+				  }
 				}
-				if(isArrayOfAudits(adtlist.results)) {
-					setAudits(adtlist.results);
-				}
+			  }
 			}
-		});
-	}, []);
+		  } catch (error) {
+			console.error('Error fetching audits:', error);
+		  } finally {
+			setAudits(fetchedAudits);
+			setStockIds(stkIds);
+		  }
+		};
+	  
+		fetchAudits();
+	  }, []);
+
+	// useEffect(() => {
+	// 	console.log(audits);
+	// }, [audits]);
+
 	return (
 <div className="flex">
   <Sidebar />
   <div className="flex flex-col w-full p-4">
     <div className="container mx-auto mt-8 flex">
       <h1 className="font-extrabold text-3xl mr-auto">Stock Audits</h1>
-      <button className={`hover:outline outline-slate-200 rounded-xl ml-auto bg-slate-200 hover:bg-slate-300 px-4`} onClick={routeChange}>New Audit</button>
+      <button className={`hover:outline outline-slate-200 rounded-xl ml-auto bg-slate-200 hover:bg-slate-300 px-4`} onClick={() => routeChange(`/locations`)}>New Audit</button>
     </div>
     <div className="container mx-auto mt-8">
       <input
@@ -55,14 +104,15 @@ const AuditPage = () => {
     </div>
     <div className="container mx-auto mt-6">
       <h1 className="text-xl font-extrabold mb-1">Recent Audits</h1>
-			{audits.map((item, index) => (
+	
+			{audits && audits?.map((item, index) => (
       <div className="flex my-2">
         <p className="mr-auto">
           <span>{item.time}</span><br/>
           <span className="text-slate-500 text-sm">Completed</span>
         </p>
-        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200" disabled>
-          Report Unavailable
+        <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200" onClick={() => routeChange(`/reports/${stockIds[index]}`)}>
+          View Report
         </button>
       </div>
 			))}
