@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className={`bg-blue-950 h-screen p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative`}
+      <div className={`bg-blue-950 h-full p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}>
         <HiArrowCircleLeft className={`bg-white text-black text-3xl rounded-full cursor-pointer absolute -right-3 top-9 border border-black rotate-${open ? '0' : '180'}`} />

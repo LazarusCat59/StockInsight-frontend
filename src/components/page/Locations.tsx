@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { authContext } from "../../App";
 import { getChoices } from '../../apicalls';
 import { Choices, LoginDetails } from '../../types';
+import Navbar from '../Navbar/Sidebar';
 
 const Locations = () => 
   
@@ -25,7 +26,7 @@ const Locations = () =>
 
   return (
     <div className="flex justify-start">
-    <Sidebar />
+    <Navbar/>
     <div>
     <div className="container mx-auto mt-8 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 grid-flow-row">
 		{locations.map((item, index) => (

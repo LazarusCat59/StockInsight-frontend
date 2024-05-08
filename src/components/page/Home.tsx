@@ -76,10 +76,9 @@ const Home = () => {
               </div>
               
           </div>
-              <div className="mb-8 mt-10  flex flex-col w-full ml-48 mx-auto">
+              <div className="mb-8 mt-10  flex flex-col w-full ml-16 mx-auto">
                 <h2 className="mb-4 text-lg font-medium text-gray-800">Completed Audits</h2>
                 <div className="flex flex-col space-y-4 w-[30rem]">
-                  {/* Render completed audits directly */}
                   <div className="rounded-md border border-gray-300 p-4 bg-white shadow-md">
                     <h3 className="text-base font-medium text-gray-800">Classroom 1 Inventory</h3>
                     <p className="mt-2 text-sm text-gray-600">Status: Ongoing</p>
@@ -96,7 +95,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className=" border border-gray-700 mb-8 flex justify-center w-1/2 mx-auto">
+          <div className=" border border-gray-700 mb-8 flex justify-center  w-1/2 mx-auto">
             <div className="flex flex-col w-full p-4">
               <div className="container mx-auto mt-8 flex">
                 <h1 className="font-extrabold text-3xl mr-auto">Stock Audits</h1>
