@@ -17,3 +17,4 @@ export { default as Addstock } from './page/Addstock';
 export { default as StocksAtLocation } from './page/StocksAtLocation';
 export { default as StockView } from './page/StockView';
 export { default as Reportsto } from './page/Reportsto';
+export { default as Auditselect } from './page/Auditselect';

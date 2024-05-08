@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate, useLocation } from 'react-router-dom';
 import { Sidebar, Home, Mainpage, Login, Footer, Request, Logout, AuditPage,
 	AddUser, Profile, Locations, NewAudit, Header, Stockaud, Auditsystem,
-	Addstock, StocksAtLocation, StockView,Reportsto} from './components/Imports';
+	Addstock, StocksAtLocation, StockView,Reportsto,Auditselect} from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 import { getCurrentUser } from './apicalls';
@@ -67,6 +67,7 @@ function RoutesLocation() {
 				<Route path='/stockaud' element={ loginToken ? <Stockaud/>: <Navigate to='/login'/>} />
 				<Route path='/auditsystem' element={ loginToken ? <Auditsystem/>: <Navigate to='/login'/>} />
 				<Route path='/addstock' element={ loginToken ? <Addstock/>: <Navigate to='/login'/>} />
+				<Route path='/auditselect' element={ loginToken ? <Auditselect/>: <Navigate to='/login'/>} />
 				<Route path='/reports/:stockId' element={ loginToken ? <Reportsto/>: <Navigate to='/login'/>} />
       </Routes>
     </>
