@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Sidebar , Header} from '../Imports'
+import { Sidebar } from '../Imports'
 import { FaComputer } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import { getAudit, getAuditedStocks } from '../../apicalls';
 import { authContext } from '../../App';
-import { Audit, isAudit, isArrayOfAudits, isArrayOfStocks, LoginDetails } from '../../types';
+import { Audit, isArrayOfStocks, LoginDetails } from '../../types';
+import { isTemplateExpression } from 'typescript';
 
 const AuditPage = () => {
 	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
@@ -26,29 +27,65 @@ const AuditPage = () => {
     navigate(path);
   }
 
-	useEffect(() => {
-		let stkIds: Array<number> = []
-		let adts: Array<Audit> = [];
-		getAuditedStocks(loginToken).then(stocklist => {
-			if(stocklist !== undefined) {
-				if(isArrayOfStocks(stocklist.results)) {
-					stocklist.results.forEach(item => {
-						stkIds.push(item.id);
-						if(item.audit_details !== null) {
-							getAudit(loginToken, item.audit_details).then(audit => {
-								if(audit !== undefined) {
-									adts.push(audit)
-								}
-							});
-						}
-					});
-				}
-			}
-		});
+	// useEffect(() => {
+	// 	let stkIds: Array<number> = []
+	// 	let adts: Array<Audit> = [];
+	// 	getAuditedStocks(loginToken).then(stocklist => {
+	// 		if(stocklist !== undefined) {
+	// 			if(isArrayOfStocks(stocklist.results)) {
+	// 				stocklist.results.forEach(item => {
+	// 					stkIds.push(item.id);
+	// 					if(item.audit_details !== null) {
+	// 						getAudit(loginToken, item.audit_details).then(audit => {
+	// 							if(typeof audit !== 'undefined') {
+	// 								adts.push(audit)
+	// 								setAudits(adts);
+	// 							}
+	// 						});
+	// 					}
+	// 				});
+	// 			}
+	// 		}
+	// 		setStockIds(stkIds);
+	// 	});
 
-		setAudits(adts);
-		setStockIds(stkIds);
-	}, []);
+		
+	// }, []);
+
+	useEffect(() => {
+		let stkIds: Array<number> = [];
+		const fetchAudits = async () => {
+		  const fetchedAudits: Array<Audit> = [];
+	  
+		  try {
+			const stocklist = await getAuditedStocks(loginToken);
+	  
+			if (stocklist !== undefined && isArrayOfStocks(stocklist.results)) {
+			  for (const item of stocklist.results) {
+				stkIds.push(item.id);
+	  
+				if (item.audit_details !== null) {
+				  const audit = await getAudit(loginToken, item.audit_details);
+				  if (typeof audit !== 'undefined') {
+					fetchedAudits.push(audit);
+				  }
+				}
+			  }
+			}
+		  } catch (error) {
+			console.error('Error fetching audits:', error);
+		  } finally {
+			setAudits(fetchedAudits);
+			setStockIds(stkIds);
+		  }
+		};
+	  
+		fetchAudits();
+	  }, []);
+
+	useEffect(() => {
+		console.log(audits);
+	}, [audits]);
 
 	return (
 <div className="flex">
@@ -67,7 +104,8 @@ const AuditPage = () => {
     </div>
     <div className="container mx-auto mt-6">
       <h1 className="text-xl font-extrabold mb-1">Recent Audits</h1>
-			{audits.map((item, index) => (
+	
+			{audits && audits?.map((item, index) => (
       <div className="flex my-2">
         <p className="mr-auto">
           <span>{item.time}</span><br/>

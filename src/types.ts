@@ -114,5 +114,5 @@ export function isArrayOfAudits(audits: unknown): audits is Audit[] {
 }
 
 export function isArrayOfStocks(stocks: unknown): stocks is Stock[] {
-	return Array.isArray(stocks) && stocks.every(item => isAudit(item));
+	return Array.isArray(stocks) && stocks.every(item => isStock(item));
 }
