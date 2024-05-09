@@ -2,12 +2,12 @@ import axios, { AxiosResponse } from 'axios'
 import { isAPIError, isList, isUser, isAudit, isStock,
 	isToken, isChoice, isChoiceList, isComputer, isLoginError,
 	APIError, List, User, Audit, Stock, Token, Choices, ChoicesList,
-	Computer, LoginError} from './types'
+	Computer, LoginError, Assignment, isAssignment} from './types'
 
 function catchErrors(data: any): any {
 	if(typeof data === "undefined") {
 		return;
-	} else if(isAPIError(data)) {
+	} else if(typeof data !== 'undefined' && isAPIError(data)) {
 		console.error(data.detail);
 		return;
 	}
@@ -53,7 +53,7 @@ export async function getLoginToken(uname: string, pwd: string): Promise<string 
 	
 	let checked_data = catchErrors(data);
 
-	if(isToken(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isToken(checked_data)) {
 		return checked_data.token;
 	}
 }
@@ -73,7 +73,7 @@ export async function getStockList(token: string, name: string, location: string
 
 	let checked_data = catchErrors(data);
 
-	if(isList(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isList(checked_data)) {
 		return checked_data;
 	}
 }
@@ -83,7 +83,7 @@ export async function getComputerList(token: string): Promise<List | undefined> 
 
 	let checked_data = catchErrors(data);
 
-	if(isList(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isList(checked_data)) {
 		return checked_data;
 	}
 }
@@ -103,7 +103,7 @@ export async function getChoices(token: string, choice: number): Promise<Choices
 
 	let checked_data = catchErrors(data);
 
-	if(isChoiceList(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isChoiceList(checked_data)) {
 		return checked_data;
 	}
 }
@@ -119,7 +119,7 @@ export async function getStock(token: string, id: number | string): Promise<Stoc
 
 	let checked_data = catchErrors(data);
 	
-	if(isStock(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isStock(checked_data)) {
 		return checked_data;
 	}
 }
@@ -135,7 +135,7 @@ export async function getAudit(token: string, id: number | string): Promise<Audi
 
 	let checked_data = catchErrors(data);
 
-	if(isAudit(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isAudit(checked_data)) {
 		return checked_data;
 	}
 }
@@ -147,7 +147,7 @@ export async function getAuditList(token: string): Promise<List | undefined> {
 
 	let checked_data = catchErrors(data);
 	
-	if(isList(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isList(checked_data)) {
 		return checked_data;
 	}
 }
@@ -159,7 +159,7 @@ export async function getCurrentUser(token: string): Promise<User | undefined> {
 
 	let checked_data = catchErrors(data);
 	
-	if(isUser(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isUser(checked_data)) {
 		return checked_data;
 	}
 }
@@ -169,7 +169,31 @@ export async function getAuditedStocks(token: string): Promise<List | undefined>
 
 	let checked_data = catchErrors(data);
 
-	if(isList(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isList(checked_data)) {
+		return checked_data;
+	}
+}
+
+export async function getUnassignedAuditors(token: string): Promise<List | undefined> {
+	let data: APIError | List | undefined;
+
+	data = await makeRequest("GET", "http://127.0.0.1:8000/api/unassignedauditors/", { headers: { "Authorization" : `Token ${token}` }});
+
+	let checked_data = catchErrors(data);
+
+	if(typeof checked_data !== 'undefined' && isList(checked_data)) {
+		return checked_data;
+	}
+}
+
+export async function getCurrentAssignment(token: string): Promise<Assignment | undefined> {
+	let data: APIError | Assignment | undefined;
+
+	data = await makeRequest("GET", "http://127.0.0.1:8000/api/getassignment/", { headers: { "Authorization" : `Token ${token}` }});
+
+	let checked_data = catchErrors(data);
+
+	if(typeof checked_data !== 'undefined' && isAssignment(checked_data)) {
 		return checked_data;
 	}
 }
@@ -179,7 +203,7 @@ export async function createUser(token: string, uname: string, pwd: string, emai
 
 	let checked_data = catchErrors(data);
 
-	if(isUser(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isUser(checked_data)) {
 		return checked_data;
 	}
 }
@@ -189,13 +213,31 @@ export async function createAudit(token: string, stockId: number, condition: str
 	
 	let checked_data = catchErrors(data);
 
-	if(isAudit(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isAudit(checked_data)) {
 		let stock: APIError | Stock | undefined = await makeRequest("PATCH", `http://127.0.0.1:8000/api/stock/${stockId}/`, { audit_details: checked_data.url }, { headers: { "Authorization" : `Token ${token}` }});
 
 		if (catchErrors(stock) === undefined) {
 			return;
 		}
 
+		return checked_data;
+	}
+}
+
+export async function createAssignment(token: string, userid: string | number, location: string) {
+	let auditor: string = '';
+
+	if(typeof userid === 'number') {
+		auditor = `http://127.0.0.1:8000/api/user/${userid}/`
+	} else {
+		auditor = userid;
+	}
+
+	let data: APIError | Assignment | undefined = await makeRequest("POST", "http://127.0.0.1:8000/api/assignment_create/", { auditor: auditor, location: location }, { headers: { "Authorization" : `Token ${token}` }});
+
+	let checked_data = catchErrors(data);
+
+	if(typeof checked_data !== 'undefined' && isAssignment(checked_data)) {
 		return checked_data;
 	}
 }
@@ -209,7 +251,7 @@ export async function createStock(token: string, name: string, category: string,
 	
 	let checked_data = catchErrors(data);
 
-	if(isStock(checked_data)) {
+	if(typeof checked_data !== 'undefined' && isStock(checked_data)) {
 		return checked_data;
 	}
 }

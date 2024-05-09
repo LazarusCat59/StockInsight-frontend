@@ -18,32 +18,32 @@ const AddUser = () => {
   const addUser = () => {
     if (!selectedRole || !email || !username) return;
 
-    if (
-      users.some(
-        user =>
-          user.role === selectedRole &&
-          (user.username === username || user.email === email)
-      )
-    ) {
-      alert(
-        'A user with the same username or email and role already exists.'
-      );
-      return;
-    }
+    // if (
+    //   users.some(
+    //     user =>
+    //       user.role === selectedRole &&
+    //       (user.username === username || user.email === email)
+    //   )
+    // ) {
+    //   alert(
+    //     'A user with the same username or email and role already exists.'
+    //   );
+    //   return;
+    // }
 
-    const newUser: User = { email, username, role: selectedRole };
-    setUsers([...users, newUser]);
+    // const newUser: User = { email, username, role: selectedRole };
+    // setUsers([...users, newUser]);
     setEmail('');
     setUsername('');
     setSelectedRole('');
 
     // Print the user object to the console
-    console.log(newUser);
+    // console.log(newUser);
   };
 
   const removeUser = (role: string) => {
-    const updatedUsers = users.filter(user => user.role !== role);
-    setUsers(updatedUsers);
+    // const updatedUsers = users.filter(user => user.role !== role);
+    // setUsers(updatedUsers);
   };
 
   const handleSubmit = () => {

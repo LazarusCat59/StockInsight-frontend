@@ -11,6 +11,8 @@ export interface Token {
 };
 
 export interface User {
+	id: number;
+	url: string;
 	username: string;
 	email: string;
 	role: string;
@@ -49,16 +51,23 @@ export interface Computer {
 	monitor: string;
 }
 
+export interface Choices {
+	code: string;
+	name: string;
+}
+
+export interface Assignment {
+	id: number;
+	url: string;
+	location: string;
+	auditor: string;
+}
+
 export interface List {
 	count: number;
 	next: string | null;
 	previous: string | null;
 	results: Array<Stock | Audit | Computer>;
-}
-
-export interface Choices {
-	code: string;
-	name: string;
 }
 
 export interface ChoicesList {
@@ -105,6 +114,10 @@ export function isUser(user: any): user is User {
 	return (user as User).role !== undefined;
 }
 
+export function isAssignment(a: any): a is Assignment {
+	return (a as Assignment).auditor !== undefined;
+}
+
 export function isChoiceList(choicelist: any): choicelist is ChoicesList {
 	return (choicelist as ChoicesList).length !== undefined;
 }
@@ -116,3 +129,8 @@ export function isArrayOfAudits(audits: unknown): audits is Audit[] {
 export function isArrayOfStocks(stocks: unknown): stocks is Stock[] {
 	return Array.isArray(stocks) && stocks.every(item => isStock(item));
 }
+
+export function isArrayOfUsers(users: unknown): users is User[] {
+	return Array.isArray(users) && users.every(item => isUser(item));
+}
+

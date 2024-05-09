@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Sidebar } from '../Imports';
-import { User, LoginDetails } from '../../types';
-import { createUser } from '../../apicalls';
+import { User, LoginDetails, isArrayOfUsers, isAssignment, Choices } from '../../types';
+import { createAssignment, createUser, getChoices, getUnassignedAuditors } from '../../apicalls';
 import { authContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,12 +10,33 @@ const Auditselect = () => {
   const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
   const [users, setUsers] = useState<User[]>([]);
   const [selectedAuditor, setSelectedAuditor] = useState('');
+	const [location, setLocation] = useState('');
+	const [locations, setLocations] = useState<Array<Choices>>([]);
 
   const handleSubmit = () => {
-   
+		createAssignment(loginToken, selectedAuditor, location).then(a => {
+			if(typeof a !== 'undefined' && isAssignment(a)) {
+				alert("Assignment created");
+			} else {
+				alert("Assignment creation unsuccessful");
+		}});
 
     navigate('/');
   };
+
+	useEffect(() => {
+		getUnassignedAuditors(loginToken).then(list => {
+			if(typeof list !== 'undefined' && isArrayOfUsers(list.results)) {
+				setUsers(list.results);
+			}
+		});
+
+    getChoices(loginToken, 1).then(cat => {
+      if (typeof cat !== 'undefined') {
+        setLocations(cat.results);
+      }
+    });
+	}, []);
 
   return (
     <div className='flex'>
@@ -39,7 +60,7 @@ const Auditselect = () => {
               <div>
                 <i className="ri-user-line" /> {user.role}
               </div>
-              <div>{user.email}</div>
+              <div>{user.username}</div>
             </div>
           ))}
         </div>
@@ -49,9 +70,21 @@ const Auditselect = () => {
             value={selectedAuditor}
             onChange={(e) => setSelectedAuditor(e.target.value)}
           >
-            <option value="">Select Auditor</option>
-            <option value="auditor1">Auditor 1</option>
-            <option value="auditor2">Auditor 2</option>
+            <option value="">-- Select Auditor --</option>
+						{users.map((user, index) => (
+							<option value={user.url}>{user.username}</option>
+						))}
+            {/* Add more options as needed */}
+          </select>
+          <select
+            className="block w-56 h-12 py-2 px-3 rounded-md shadow-sm sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-white bg-gradient-to-r from-gray-500 to-gray-900 hover:bg-gradient-to-bl hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center items-center dark:hover:bg-gray-700  bg-gray-50 focus:border-blue-500 p-5 appearance-none border border-gray-300 focus:ring-opacity-75"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          >
+            <option value="">-- Select Location --</option>
+						{locations.map((loc, index) => (
+							<option value={loc.code}>{loc.name}</option>
+						))}
             {/* Add more options as needed */}
           </select>
         </div>
@@ -59,7 +92,7 @@ const Auditselect = () => {
           <button
             type="button"
             className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
-            
+            onClick={handleSubmit}
           >
             Proceed
           </button>
