@@ -62,7 +62,7 @@ const Locations = () =>
 		</div>
 		))}
 
-		{userRole === 'ADT' &&
+		{(userRole === 'ADT' && auditloc.code !== '') &&
 		<div className="outline outline-custom-yellow hover:bg-custom-yellow rounded mx-2 my-2 p-3 bg-custom-gray hover:text-custom-black text-custom-white font-bold">
     <Link to={`/locations/${auditloc.code}`}>
     <FaComputer className="w-48 h-48 text-custom-black object-cover aspect-square p-3 mx-auto"/>
@@ -72,12 +72,7 @@ const Locations = () =>
 		</div>
 		}
 </div>
-
 </div>
-
-
-
-    
   </div>
 );
 }
