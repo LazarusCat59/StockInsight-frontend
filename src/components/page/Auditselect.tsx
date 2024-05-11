@@ -39,24 +39,24 @@ const Auditselect = () => {
 	}, []);
 
   return (
-    <div className='flex'>
+    <div className='flex h-screen bg-custom-light-gray'>
       <Sidebar />
-      <div className='w-screen'>
-        <h2 className="text-4xl font-bold text-black dark:text-gray-800 mx-60">
+      <div className='w-screen text-custom-white  bg-custom-light-gray'>
+        <h2 className="text-4xl font-bold  mx-60">
           Users
         </h2>
-        <h3 className="my-2 text-lg text-gray-600 dark:text-gray-800 mx-60">
+        <h3 className="my-2 text-lg mx-60">
           Manage who can view and edit the stock management system
         </h3>
         <div className="mx-60 mt-5">
-          <div className="p-5 h-16 border flex justify-between">
+          <div className="p-5 h-16 border border-custom-yellow text-custom-white shadow-lg  bg-custom-black  flex justify-between">
             <div>
               <i className="ri-user-line" /> Role
             </div>
             <div>Username</div>
           </div>
           {users.map((user, index) => (
-            <div key={index} className="p-5 h-16 border flex justify-between">
+            <div key={index} className="p-5 h-16 text-custom-white border-custom-yellow  shadow-lg bg-custom-black border flex justify-between">
               <div>
                 <i className="ri-user-line" /> {user.role}
               </div>
@@ -66,7 +66,7 @@ const Auditselect = () => {
         </div>
         <div className="mx-60 mt-3">
           <select
-            className="block w-56 h-12 py-2 px-3 rounded-md shadow-sm sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-white bg-gradient-to-r from-gray-500 to-gray-900 hover:bg-gradient-to-bl hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center items-center dark:hover:bg-gray-700  bg-gray-50 focus:border-blue-500 p-5 appearance-none border border-gray-300 focus:ring-opacity-75"
+            className=" block w-56 h-12 py-2 px-3 rounded-md shadow-sm sm:text-sm dark:bg-custom-black dark:border-custom-yellow dark:text-custom-yellow dark:focus:ring-blue-500 dark:focus:border-custom-white text-custom-yellow bg-gradient-to-r  hover:bg-gradient-to-bl hover:bg-blue-800 hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center items-center dark:hover:bg-custom-black dark:hover:text-custom-white dark:hover:border-custom-white  bg-custom-black focus:border-blue-500 p-5 appearance-none border border-gray-300 focus:ring-opacity-75  "
             value={selectedAuditor}
             onChange={(e) => setSelectedAuditor(e.target.value)}
           >
@@ -76,8 +76,9 @@ const Auditselect = () => {
 						))}
             {/* Add more options as needed */}
           </select>
-          <select
-            className="block w-56 h-12 py-2 px-3 rounded-md shadow-sm sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-white bg-gradient-to-r from-gray-500 to-gray-900 hover:bg-gradient-to-bl hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center items-center dark:hover:bg-gray-700  bg-gray-50 focus:border-blue-500 p-5 appearance-none border border-gray-300 focus:ring-opacity-75"
+         <div className='mt-2'>
+         <select
+            className="block w-56 h-12 py-2 px-3 rounded-md shadow-sm sm:text-sm dark:bg-custom-black dark:border-custom-yellow dark:text-custom-yellow dark:focus:ring-blue-500 dark:focus:border-custom-white text-custom-yellow bg-gradient-to-r  hover:bg-gradient-to-bl hover:bg-blue-800 hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium text-sm text-center items-center dark:hover:bg-custom-black dark:hover:text-custom-white dark:hover:border-custom-white  bg-custom-black focus:border-blue-500 p-5 appearance-none border border-gray-300 focus:ring-opacity-75"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           >
@@ -87,6 +88,7 @@ const Auditselect = () => {
 						))}
             {/* Add more options as needed */}
           </select>
+         </div>
         </div>
         <div className="mx-60 mt-5 space-x-3">
           <button

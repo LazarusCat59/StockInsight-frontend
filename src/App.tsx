@@ -22,7 +22,7 @@ function App() {
   }, [loginToken])
 
   return (
-    <div className="App ">
+    <div className="App bg-custom-light-gray  h-full">
       <BrowserRouter>
         <authContext.Provider value={{loginToken, setLoginToken}}>
           <RoutesLocation/>

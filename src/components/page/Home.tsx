@@ -58,7 +58,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex justify-start">
+    <div className="flex justify-start text-custom-black bg-custom-light-gray ">
       <Sidebar />
       <div className="flex flex-col justify-start w-full mx-auto ">
         <div className='flex p-5 '>
@@ -66,57 +66,57 @@ const Home = () => {
             <div className='flex flex-col w-full mr-5'>
           <div className='flex-col mb-3'>
 
-          <div className="w-full mb-4 rounded-md border border-gray-300 p-6 bg-white shadow-md">
-                <p className="text-center text-5xl font-bold text-gray-800">{stockNum}</p>
-                <p className="text-center text-lg text-gray-600">Total Stock</p>
+          <div className="w-full mb-4 rounded-md border border-custom-black p-6 bg-custom-gray shadow-md">
+                <p className="text-center text-5xl font-bold text-custom-white selection:text-custom-yellow">{stockNum}</p>
+                <p className="text-center text-lg font-bold selection:text-black text-custom-yellow">Total Stock</p>
               </div>
-          <div className="w-full rounded-md border border-gray-300 p-6 bg-white shadow-md">
-                <p className="text-center text-5xl font-bold text-gray-800">{audits.length}</p>
-                <p className="text-center text-lg text-gray-600">Total Audits</p>
+          <div className="w-full rounded-md border border-custom-black p-6 bg-custom-gray shadow-md">
+                <p className="text-center text-5xl font-bold text-custom-white selection:text-custom-yellow">{audits.length}</p>
+                <p className="text-center text-lg font-bold text-custom-yellow selection:text-black">Total Audits</p>
               </div>
               
           </div>
               <div className="mb-8 mt-10  flex flex-col w-full ml-16 mx-auto">
-                <h2 className="mb-4 text-lg font-medium text-gray-800">Completed Audits</h2>
+                <h2 className="mb-4 text-2xl font-bold  selection:text-custom-black ">Completed Audits</h2>
                 <div className="flex flex-col space-y-4 w-[30rem]">
-                  <div className="rounded-md border border-gray-300 p-4 bg-white shadow-md">
-                    <h3 className="text-base font-medium text-gray-800">Classroom 1 Inventory</h3>
-                    <p className="mt-2 text-sm text-gray-600">Status: Ongoing</p>
+                  <div className="rounded-md border border-custom-black p-4 bg-custom-gray shadow-md">
+                    <h3 className="text-base font-bold text-slate-200 selection:text-custom-yellow">Classroom 1 Inventory</h3>
+                    <p className="mt-2 text-sm font-semibold text-custom-yellow selection:text-black">Status: Ongoing</p>
                   </div>
-                  <div className="rounded-md border border-gray-300 p-4 bg-white shadow-md">
-                    <h3 className="text-base font-medium text-gray-800">Lab 2 Inventory</h3>
-                    <p className="mt-2 text-sm text-gray-600">Status: Completed</p>
+                  <div className="rounded-md border border-custom-black p-4 bg-custom-gray shadow-md">
+                    <h3 className="text-base font-bold text-custom-white selection:text-custom-yellow">Lab 2 Inventory</h3>
+                    <p className="mt-2 text-sm font-semibold text-custom-yellow selection:text-black">Status: Completed</p>
                   </div>
-                  <div className="rounded-md border border-gray-300 p-4 bg-white shadow-md">
-                    <h3 className="text-base font-medium text-gray-800">Lab 3 Inventory</h3>
-                    <p className="mt-2 text-sm text-gray-600">Status: Incomplete</p>
+                  <div className="rounded-md border border-custom-black p-4 bg-custom-gray shadow-md">
+                    <h3 className="text-base font-bold text-custom-white selection:text-custom-yellow">Lab 3 Inventory</h3>
+                    <p className="mt-2 text-sm font-semibold text-custom-yellow selection:text-black">Status: Incomplete</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className=" border border-gray-700 mb-8 flex justify-center  w-1/2 mx-auto">
+          <div className=" border border-custom-black shadow-md bg-custom-gray rounded-md mb-8 flex justify-center  w-1/2 mx-auto">
             <div className="flex flex-col w-full p-4">
               <div className="container mx-auto mt-8 flex">
-                <h1 className="font-extrabold text-3xl mr-auto">Stock Audits</h1>
-                <button className={`hover:outline outline-slate-200 rounded-xl ml-auto bg-slate-200 hover:bg-slate-300 px-4`} onClick={() => routeChange(`/locations`)}>New Audit</button>
+                <h1 className="font-extrabold text-3xl mr-auto selection:text-custom-black">Stock Audits</h1>
+                <button className={`hover:outline  rounded-xl ml-auto bg-custom-black text-custom-yellow hover:bg-custom-black hover:text-white selection:text-black px-4  hover:outline-slate-200 outline outline-custom-yellow`} onClick={() => routeChange(`/locations`)}>New Audit</button>
               </div>
               <div className="container mx-auto mt-8">
                 <input
-                  className="w-full rounded bg-slate-200 placeholder:text-center hover:bg-slate-300 py-1 px-4"
+                  className="w-full rounded hover:bg-custom-black hover:outline  hover:outline-slate-200 selection:text-black text-custom-yellow placeholder:text-center hover:placeholder-white placeholder-custom-yellow bg-custom-black py-1 px-4"
                   type="text"
                   placeholder="Search by product name or Location"
                 />
               </div>
               <div className="container mx-auto mt-6">
-                <h1 className="text-xl font-extrabold mb-1">Recent Audits</h1>
+                <h1 className="text-xl font-extrabold mb-1 selection:text-custom-black">Recent Audits</h1>
                 {audits && audits.map((item, index) => (
                   <div className="flex my-2">
                     <p className="mr-auto">
-                      <span>{item.time}</span><br/>
-                      <span className="text-slate-500 text-sm">Completed</span>
+                      <span className='text-custom-white selection:text-custom-yellow font-semibold'>{item.time}</span><br/>
+                      <span className="text-custom-yellow  selection:text-black text-sm font-semibold">Completed</span>
                     </p>
-                    <button className="ml-auto text-sm rounded-xl bg-slate-200 px-4 my-2 hover:bg-slate-300 hover:outline outline-slate-200" onClick={() => routeChange(`/reports/${stockIds[index]}`)}>
+                    <button className="ml-auto text-sm font-semibold rounded-xl selection:text-black  bg-custom-black text-custom-yellow hover:bg-custom-black hover:text-white px-4 my-2 hover:outline hover:outline-slate-200 outline outline-custom-yellow" onClick={() => routeChange(`/reports/${stockIds[index]}`)}>
                       View Report
                     </button>
                   </div>

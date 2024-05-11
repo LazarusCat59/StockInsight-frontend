@@ -73,12 +73,12 @@ const Auditsystem = () => {
   const Content = "Submit";
 
   return (
-    <div className="flex">
+    <div className="flex ">
       <Navbar/>
       <div>
         <div className='flex w-[80rem] pt-10 pr-10 pl-12 pb-6 '>
           <div className="ml-[8rem] mr-[8rem] flex justify-center items-center h-92">
-            <h1 className="text-center text-4xl font-extrabold mt-5 ">Stock Details</h1>
+            <h1 className="text-center text-4xl font-extrabold mt-5 text-custom-white  ">Stock Details</h1>
           </div>
           <div>
             <div className="container mx-10 rounded-xl bg-slate-200 ">

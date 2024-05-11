@@ -18,7 +18,7 @@ function Inputbox({ tag, ph, value, onChange }: InputboxProps) {
           id="input-group-1"
           value={value}
           onChange={onChange}
-          className="bg-gray-50 border mx-5  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block h-12 w-56 p-5 " placeholder={ph}
+          className="bg-custom-black border mx-5  border-custom-yellow text-custom-white placeholder:text-custom-yellow  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block h-12 w-56 p-5 " placeholder={ph}
         />
       </div>
     </div>

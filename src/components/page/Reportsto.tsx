@@ -52,15 +52,15 @@ const Reportsto: React.FC = () => {
   return (
     <div className='flex'>
               <Navbar/>
-              <div className="bg-gray-100 min-h-screen w-full p-5">
-                  <header className="bg-white border-b border-gray-200 p-4">
-                      <h1 className="text-2xl font-semibold">Audit Report</h1>
+              <div className="bg-custom-gray min-h-screen w-full p-5">
+                  <header className="bg-custom-light-gray border-b border-custom-yellow p-4">
+                      <h1 className="text-2xl font-semibold text-custom-white">Audit Report</h1>
                   </header>
                   <main className="container mx-auto py-8">
                       <form onSubmit={handleSubmit}>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                              <div className="bg-white p-6 rounded shadow-md">
-                                  <h2 className="text-lg font-semibold mb-4">Stock Details</h2>
+                              <div className="bg-custom-light-gray p-6 rounded shadow-md border border-custom-yellow text-custom-white">
+                                  <h2 className="text-lg font-semibold mb-4 text-custom-yellow">Stock Details</h2>
                                   <p>Name: {stockDetails.name}</p>
                                   <p>Category: {stockDetails.category}</p>
                                   <p>Item Code: {stockDetails.item_code}</p>
@@ -68,8 +68,8 @@ const Reportsto: React.FC = () => {
                                   <p>Purchase Date: {stockDetails.purchase_date}</p>
                                   <p>Description: {stockDetails.description}</p>
                               </div>
-                              <div className="bg-white p-6 rounded shadow-md">
-                                  <h2 className="text-lg font-semibold mb-4">Audit Details</h2>
+                              <div className="bg-custom-light-gray p-6 rounded shadow-md border border-custom-yellow text-custom-white">
+                                  <h2 className="text-lg font-semibold mb-4 text-custom-yellow">Audit Details</h2>
                                   <p>Condition: {auditDetails.condition}</p>
                                   <p>Audit Time: {auditDetails.time}</p>
                                   <p>Auditor: {auditDetails.auditor}</p>
@@ -78,7 +78,7 @@ const Reportsto: React.FC = () => {
                           <div className="text-center mt-8">
                               <button
                                   type="submit"
-                                  className="text-white bg-gradient-to-r from-blue-500  to-blue-900 hover:bg-gradient-to-br  focus:outline-none font-medium rounded-lg text-sm px-5 w-[10rem] py-2.5 text-center me-2 mb-2"
+                                  className="text-white bg-gradient-to-r from-slate-600  to-zinc-900 hover:bg-gradient-to-br  focus:outline-none font-medium rounded-lg text-sm px-5 w-[10rem] py-2.5 text-center me-2 mb-2"
                               >
                                   Download Report
                               </button>

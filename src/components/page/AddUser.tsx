@@ -58,17 +58,17 @@ const AddUser = () => {
   };
 
   return (
-    <div className='flex'>
+    <div className='flex h-screen bg-custom-light-gray'>
       <Sidebar />
-      <div className='w-screen'>
-        <h2 className="text-4xl font-bold text-black dark:text-gray-800 mx-60">
+      <div className='w-screen text-custom-white'>
+        <h2 className="text-4xl font-bold mt-3 mx-60">
           Users
         </h2>
-        <h3 className="my-2 text-lg text-gray-600 dark:text-gray-800 mx-60">
+        <h3 className="my-2 text-lg  mx-60">
           Manage who can view and edit the stock management system
         </h3>
         <div className="mx-60 mt-5">
-          <div className="p-5 h-16 border flex justify-between">
+          <div className="p-5 h-16 border border-custom-yellow text-custom-white  bg-custom-gray flex justify-between">
             <div>
               <i className="ri-user-line" /> Role
             </div>
@@ -85,39 +85,39 @@ const AddUser = () => {
         </div>
         <h1 className="mx-60 mt-2 font-bold text-3xl">Add Or Remove Users</h1>
 
-        <div className="relative mt-3">
+        <div className="relative mt-3 ">
           <div className="absolute ml-[15rem] inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-            <svg className="w-4 h-4  text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+            <svg className="w-4 h-4   text-custom-yellow  " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
               <path d="M10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
               <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
             </svg>
           </div>
-          <input type="text" id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[20rem] ml-[15rem] ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="text" id="input-group-1" className="bg-custom-black border border-custom-yellow text-custom-white text-sm rounded-lg focus:ring-blue-500 focus:border-custom-white block w-[20rem] ml-[15rem] ps-10 p-2.5  dark:bg-custom-black dark:border-custom-yellow dark:placeholder-custom-yellow placeholder-custom-yellow dark:text-custom-white dark:focus:ring-blue-500 dark:focus:border-custom-white" placeholder="name@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
 
         <div className="flex mt-3 w-[20rem]">
-          <span className="inline-flex ml-[15rem]  items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-            <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <span className="inline-flex ml-[15rem]  items-center px-3 text-sm text-custom-yellow bg-custom-black border rounded-e-0 border-custom-yellow border-e-0 rounded-s-md dark:bg-custom-black dark:text-custom-yellow dark:border-custom-yellow">
+            <svg className="w-4 h-4 text-custom-yellow dark:text-custom-yellow hover:border-custom-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
             </svg>
           </span>
-          <input type="text" className="w-[32rem] rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block  text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input type="text" className="w-[32rem] rounded-none rounded-e-lg bg-custom-black border text-custom-yellow focus:ring-blue-500 focus:border-custom-white block  text-sm border-custom-yellow p-2.5  dark:bg-custom-black dark:border-custom-yellow dark:placeholder-custom-yellow dark:text-custom-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
 
         <div className="flex mt-3 w-[20rem]">
-          <span className="inline-flex ml-[15rem]  items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-            <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <span className="inline-flex ml-[15rem]  items-center px-3 text-sm text-custom-yellow bg-custom-black border rounded-e-0 border-custom-yellow border-e-0 rounded-s-md dark:bg-custom-black dark:text-custom-yellow dark:border-custom-yellow">
+            <svg className="w-4 h-4 text-custom-yellow dark:text-custom-yellow" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
             </svg>
           </span>
-          <input type="password" className="w-[32rem] rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block  text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" className="w-[32rem] rounded-none rounded-e-lg bg-custom-black border text-custom-yellow focus:ring-blue-500 focus:border-custom-white block  text-sm border-custom-yellow p-2.5  dark:bg-custom-black dark:border-custom-yellow dark:placeholder-custom-yellow dark:text-custom-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
 
         <div className="mx-60 mt-3">
           <select
             id="role"
             name="role"
-            className=" block w-56 h-12 py-2 px-3  bg-white rounded-md shadow-sm  sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  text-white bg-gradient-to-r from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm  text-center  items-center  dark:hover:bg-gray-700 dark:focus:ring-blue-800bg-gray-50  focus:border-blue-500   p-5 appearance-none  border border-gray-300  focus:ring-opacity-75 "
+            className="  text-custom-yellow bg-gradient-to-r   bg-custom-black hover:bg-gradient-to-bl  hover:bg-custom-black hover:text-custom-white focus:ring-4 focus:outline-none focus:ring-blue-700 font-medium rounded-lg text-sm   px-5 py-2.5 text-center inline-flex items-center dark:bg-custom-black dark:hover:bg-custom-black dark:focus:ring-blue-800   focus:border-custom-white  h-12 w-56 appearance-none  border border-custom-yellow  focus:ring-opacity-75 "
             value={selectedRole}
             onChange={(e) => setSelectedRole(e.target.value)}
           >

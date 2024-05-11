@@ -86,7 +86,7 @@ const Addstock = () => {
   };
 
   return (
-    <div className='flex'>
+    <div className='flex bg-custom-light-gray text-custom-white'>
       <Sidebar />
       <div>
         <div className='flex justify-center w-[85rem] mt-3'>
@@ -106,14 +106,14 @@ const Addstock = () => {
 
               <div className='flex mt-5'>
               <h1 className='text-xl font-semibold'>Date:</h1>
-              <DatePicker className='ml-[1.8rem] w-56 border rounded-lg h-10 px-[4rem] border-gray-300 bg-gray-200   focus:ring-blue-500 focus:border-blue-500 text-white bg-gradient-to-r mx-6 from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none  font-medium  py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800  p-5 appearance-none  focus:ring-opacity-75' selected={date} onChange={(date: Date) => setDate(date as Date)} />
+              <DatePicker className='ml-[1.8rem] w-56 border rounded-lg h-10 px-[4rem] border-custom-yellow bg-custom-black   focus:ring-blue-500 focus:border-custom-white text-custom-yellow bg-gradient-to-r mx-6  hover:bg-gradient-to-bl  hover:bg-custom-gray hover:text-white focus:ring-4 focus:outline-none  font-medium  py-2.5 text-center inline-flex items-center dark:bg-custom-black dark:hover:bg-custom-black dark:focus:ring-blue-700  p-5 appearance-none  focus:ring-opacity-75' selected={date} onChange={(date: Date) => setDate(date as Date)} />
               </div>
               </div>
             </div>
             <div>
       <div className=' flex mt-5'>
               <h1 className='text-xl font-semibold'>Category:</h1>
-                <select name="category" id="location" className=" text-white bg-gradient-to-r mx-6 from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm ml-5  px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800bg-gray-50  focus:border-blue-500  h-12 w-56 p-5 appearance-none  border border-gray-300  focus:ring-opacity-75" onChange={handleSelectChange} >
+                <select name="category" id="location" className=" text-custom-yellow bg-gradient-to-r mx-6  bg-custom-black hover:bg-gradient-to-bl  hover:bg-custom-black hover:text-custom-white focus:ring-4 focus:outline-none focus:ring-blue-700 font-medium rounded-lg text-sm ml-5  px-5 py-2.5 text-center inline-flex items-center dark:bg-custom-black dark:hover:bg-custom-black dark:focus:ring-blue-800   focus:border-custom-white  h-12 w-56 p-5 appearance-none  border border-custom-yellow  focus:ring-opacity-75" onChange={handleSelectChange} >
 								<option value="">-- Select Category --</option>
                   {categories.map((item, index) => (
                     <option key={index} value={item.code}>
@@ -124,7 +124,7 @@ const Addstock = () => {
               </div>
               <div className='flex mt-5'>
               <h1 className='text-xl font-semibold'>Condition:</h1>
-                <select name="condition" id="location" className=" text-white bg-gradient-to-r mx-6 from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  ml-2 px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800bg-gray-50  focus:border-blue-500  h-12 w-56 p-5 appearance-none  border border-gray-300  focus:ring-opacity-75" onChange={handleSelectChange} >
+                <select name="condition" id="location" className="  text-custom-yellow bg-gradient-to-r mx-6  bg-custom-black hover:bg-gradient-to-bl  hover:bg-custom-black hover:text-custom-white focus:ring-4 focus:outline-none focus:ring-blue-700 font-medium rounded-lg text-sm ml-3  px-5 py-2.5 text-center inline-flex items-center dark:bg-custom-black dark:hover:bg-custom-black dark:focus:ring-blue-800   focus:border-custom-white  h-12 w-56 p-5 appearance-none  border border-custom-yellow  focus:ring-opacity-75" onChange={handleSelectChange} >
 								<option value="">-- Select Condition --</option>
                   {conditions.map((item, index) => (
                     <option key={index} value={item.code}>
@@ -135,7 +135,7 @@ const Addstock = () => {
               </div>  
                 <div className='flex mt-5'>
                   <h1 className='text-xl font-semibold'>Location:</h1>
-                  <select name="location" id="location" className=" text-white bg-gray-50 mx-6  bg-gradient-to-r from-gray-500 to-gray-900 hover:bg-gradient-to-bl  hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800bg-gray-50  focus:border-blue-500  h-12 w-56 p-5 appearance-none  border border-gray-300  focus:ring-opacity-75" onChange={handleSelectChange} >
+                  <select name="location" id="location" className=" text-custom-yellow bg-gradient-to-r mx-6  bg-custom-black hover:bg-gradient-to-bl  hover:bg-custom-black hover:text-custom-white focus:ring-4 focus:outline-none focus:ring-blue-700 font-medium rounded-lg text-sm ml-6  px-5 py-2.5 text-center inline-flex items-center dark:bg-custom-black dark:hover:bg-custom-black dark:focus:ring-blue-800   focus:border-custom-white  h-12 w-56 p-5 appearance-none  border border-custom-yellow  focus:ring-opacity-75" onChange={handleSelectChange} >
 								<option value="">-- Select Location --</option>
                     {locations.map((item, index) => (
                       <option key={index} value={item.code}>
@@ -156,7 +156,7 @@ const Addstock = () => {
               <textarea
                 id="message"
                 rows={2}
-                className="block p-2.5 w-[36rem] text-sm ml-2 mt-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400"
+                className="block p-2.5 w-[36rem]  ml-2 mt-5   focus:ring-blue-500 focus:border-blue-500 placeholder-custom-yellow hover:placeholder-custom-white bg-custom-black border mx-5  border-custom-yellow text-custom-white placeholder:text-custom-yellow  text-sm rounded-lg "
                 placeholder="Description"
               ></textarea>
             </div>
@@ -166,7 +166,7 @@ const Addstock = () => {
           <button
               type="button"
               className="text-white bg-gradient-to-r from-cyan-500  to-blue-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 w-[10rem] py-2.5 text-center me-2 mb-2"
-              onClick={handleSubmit} // Add onClick handler to call handleSubmit function
+              onClick={handleSubmit}
             >
               Submit
             </button>

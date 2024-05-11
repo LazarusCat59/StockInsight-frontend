@@ -33,20 +33,22 @@ const StocksAtLocation = () => {
 	}, []);
 
   return (
-    <div className="flex justify-start">
+    <div className="flex justify-start h-full">
     <Sidebar />
     <div className='px-16 mx-auto'>
     <div className="container mx-auto mt-8 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-flow-row">
 		{stocks.map((item, index) => (
-		<div key={index} className="outline outline-gray-300 rounded mx-2 my-2 p-3 hover:bg-slate-300">
+		<div key={index} className="outline  outline-custom-yellow hover:bg-custom-yellow rounded mx-2 my-2 p-3 bg-custom-gray hover:text-custom-black text-custom-white font-bold">
     <Link to={`/stocks/${item.id}`}>
-    <FaComputer className="w-48 h-48  object-cover aspect-square p-3 mx-auto"/>
+    <FaComputer className="w-48 h-48  text-custom-black object-cover aspect-square p-3 mx-auto"/>
       <h3 className="font-bold text-center">{item.name}</h3>
     </Link>
 		</div>
 		))}
 </div>
+
 </div>
+
   </div>
 );
 }

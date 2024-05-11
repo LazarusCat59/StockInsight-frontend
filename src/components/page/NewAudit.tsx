@@ -96,56 +96,58 @@ const NewAudit = () => {
   }, [auditDetail])
 
   return (
-    <div className="flex">
+    <div className="flex bg-custom-gray">
     <Sidebar />
-    <div className="mx-auto">
-      <h1 className="text-center text-4xl font-extrabold mt-5 mr-14">Stock Details</h1>
-      <div className="container mx-12 rounded-xl bg-slate-200 pt-5" key={isLoaded ? 'yes' : 'no' }>
-  <div className="h-12 w-12 then shadow-md rounded-full flex mx-auto"></div>
-  <div className="mt-5 grid grid-cols-2 px-3 pb-1 pt-3">
-    <p className="text-center font-bold">Name</p>
-    <p className="text-center font-bold">Category</p>
+    <div className="mx-auto h-screen w-3/5 mt-5">
+      <div className="container mx-12 rounded-xl bg-custom-light-gray pt-5" key={isLoaded ? 'yes' : 'no' }>
+      <div className=" mx-auto ">
+  <h1 className="text-center text-4xl font-extrabold mt-5  mb-3 text-custom-white">Stock Details</h1>
+
+  </div>
+  <div className="mt-5 grid grid-cols-2 px-3 pb-1 pt-3 ">
+    <p className="text-center font-bold text-custom-white">Name</p>
+    <p className="text-center font-bold text-custom-white">Category</p>
   </div>
   <div className="grid grid-cols-2 pb-3">
-    <input className="mx-10 rounded text-center bg-slate-50" type="text" defaultValue={name} disabled/>
-    <select className="mx-10 rounded text-center bg-white" defaultValue="Electronics" disabled>
+    <input className="mx-10 rounded text-center  h-10 bg-custom-black text-custom-yellow border border-custom-yellow" type="text" defaultValue={name} disabled/>
+    <select className="mx-10 rounded text-center  h-10 bg-custom-black text-custom-yellow border border-custom-yellow" defaultValue="Electronics" disabled>
 			{categories.map((item, index) => (
 				<option key={index} value={item.code}>{item.name}</option>
 				))}
     </select>
   </div>
   <div className="grid grid-cols-2 pb-1">
-    <p className="text-center font-bold">Item Code</p>
-    <p className="text-center font-bold">Bill No.</p>
+    <p className="text-center font-bold text-custom-white">Item Code</p>
+    <p className="text-center font-bold text-custom-white">Bill No.</p>
   </div>
   <div className="grid grid-cols-2 pb-3">
-    <input className="mx-10 rounded text-center bg-slate-50" type="text" defaultValue={itemCode} disabled/>
-    <input className="mx-10 rounded text-center bg-slate-50" type="text" defaultValue={billNo} disabled/>
+    <input className="mx-10 rounded text-center  h-10 bg-custom-black text-custom-yellow border border-custom-yellow" type="text" defaultValue={itemCode} disabled/>
+    <input className="mx-10 rounded text-center  h-10 bg-custom-black text-custom-yellow border border-custom-yellow" type="text" defaultValue={billNo} disabled/>
   </div>
   <div className="grid grid-cols-2 pb-1">
-    <p className="text-center font-bold">Purchase Date</p>
-    <p className="text-center font-bold">Description</p>
+    <p className="text-center font-bold text-custom-white">Purchase Date</p>
+    <p className="text-center font-bold text-custom-white">Description</p>
   </div>
   <div className="mb-5 grid grid-cols-2 pb-5">
-    <input className="mx-10 rounded text-center bg-slate-50" type="text" defaultValue={purchaseDate} disabled/>
-    <input className="mx-10 rounded text-center bg-slate-50" type="text" defaultValue={description} disabled/>
+    <input className="mx-10 rounded text-center  h-10 bg-custom-black text-custom-yellow border border-custom-yellow" type="text" defaultValue={purchaseDate} disabled/>
+    <input className="mx-10 rounded text-center  h-10 bg-custom-black text-custom-yellow border border-custom-yellow" type="text" defaultValue={description} disabled/>
   </div>
-  <h1 className="text-center text-4xl font-extrabold mt-5 mr-14">Audit Details</h1>
+  <h1 className="text-center text-4xl text-custom-white font-extrabold mt-5 mb-3">Audit Details</h1>
   <div className="grid grid-cols-2 pb-1">
-    <p className="text-center font-bold">Condition</p>
-    <p className="text-center font-bold">Remarks</p>
+    <p className="text-center font-bold text-custom-white">Condition</p>
+    <p className="text-center font-bold text-custom-white">Remarks</p>
   </div>
   <div className="mb-5 grid grid-cols-2 pb-5">
-	<select className="mx-10 rounded text-center bg-white" onChange={(e) => setCondition(e.target.value)}>
+	<select className="mx-10 rounded text-center  h-10 bg-custom-black text-custom-yellow border border-custom-yellow" onChange={(e) => setCondition(e.target.value)}>
 		<option value="">-- Select Condition --</option>
 	{APIConditions.map((item, index) => (
 		<option key={index} value={item.code}>{item.name}</option>
 		))}
   </select>
-  <input className="mx-10 rounded text-center bg-slate-50" type="text" onChange={(e) => setRemarks(e.target.value)}/>
+  <input className="mx-10 rounded text-center  h-10 bg-custom-black text-custom-white border border-custom-yellow" type="text" onChange={(e) => setRemarks(e.target.value)}/>
   </div>
   <div className="flex justify-center items-center">
-<button type="button" className={`text-white bg-gray-500 hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"`} onClick={handleSubmit} >Audit</button>
+<button type="button" className={`text-white mb-5 bg-gray-500 hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"`} onClick={handleSubmit} >Audit</button>
 </div>
 </div>
 </div>
