@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate, useLocation } from 'react-router-dom';
 import { Sidebar, Home, Mainpage, Login, Footer, Request, Logout, AuditPage,
 	AddUser, Profile, Locations, NewAudit, Header, Stockaud, Auditsystem,
-	Addstock, StocksAtLocation, StockView,Reportsto,Auditselect} from './components/Imports';
+	Addstock, StocksAtLocation, StockView, Reportsto, Auditselect } from './components/Imports';
 import logo from './logo.svg';
 import './App.css';
 import { getCurrentUser } from './apicalls';
@@ -17,14 +17,22 @@ function App() {
     () => JSON.parse(localStorage.getItem('login_token')!)
   );
 
+  const [userRole, setUserRole] = useState(
+    () => JSON.parse(localStorage.getItem('user_role')!)
+  );
+
   useEffect(() => {
     localStorage.setItem('login_token', JSON.stringify(loginToken));
   }, [loginToken])
 
+  useEffect(() => {
+    localStorage.setItem('user_role', JSON.stringify(userRole));
+  }, [userRole])
+
   return (
     <div className="App bg-custom-light-gray  h-full">
       <BrowserRouter>
-        <authContext.Provider value={{loginToken, setLoginToken}}>
+        <authContext.Provider value={{loginToken, setLoginToken, userRole, setUserRole}}>
           <RoutesLocation/>
           <Footer/>
         </authContext.Provider>
@@ -37,15 +45,7 @@ function RoutesLocation() {
   const location = useLocation();
   const isVisible = !(location.pathname === '/login');
 
-	const [ userRole, setUserRole ] = useState("");
-	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
-
-	useEffect(() => {
-		getCurrentUser(loginToken).then(user => {
-			if(typeof user !== 'undefined') {
-				setUserRole(user.role);
-			}});
-	}, [])
+	const { loginToken, setLoginToken, userRole, setUserRole } = useContext(authContext) as LoginDetails;
 
   return (
     <>

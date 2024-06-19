@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { getLoginToken } from '../../apicalls';
+import { getCurrentUser, getLoginToken } from '../../apicalls';
 import { authContext } from '../../App';
 import { LoginDetails } from '../../types';
 import { Navigate,Route,useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ import Mainpage from '../Mainpage';
 
 
 const Login = () => {
-	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
+	const { loginToken, setLoginToken, userRole, setUserRole } = useContext(authContext) as LoginDetails;
 	const [needsRedirect, setNeedsRedirect] = useState(false);
 
   let navigate = useNavigate(); 
@@ -41,10 +41,12 @@ const Login = () => {
 			let token = await getLoginToken(formData.username, formData.password);
 			if(typeof token !== "undefined") {
 				setLoginToken(token);
-				setNeedsRedirect(true);
-        routeChange();
+				let user_details = await getCurrentUser(token);
+				if(typeof user_details !== "undefined") {
+					setUserRole(user_details.role);
+				} routeChange();
 			} else {
-				console.error("Login failed");
+				alert("Login failed");
 			}
 			})()
   };

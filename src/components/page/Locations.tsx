@@ -10,9 +10,8 @@ import { Sidebar } from '../Imports';
 const Locations = () => 
   
 {
-	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
+	const { loginToken, setLoginToken, userRole, setUserRole } = useContext(authContext) as LoginDetails;
 	const [locations, setLocations] = useState<Array<Choices>>([]);
-	const [userRole, setUserRole] = useState('');
 	const [auditloc, setAuditloc] = useState<Choices>({
 		code: '',
 		name: '',
@@ -25,10 +24,6 @@ const Locations = () =>
 					setLocations(loc.results);
 				}
 			})
-		getCurrentUser(loginToken).then(user => {
-			if (typeof user !== 'undefined') {
-				setUserRole(user.role);
-			}});
 	}, []);
 
 	useEffect(() => {
@@ -44,7 +39,7 @@ const Locations = () =>
 				}
 			});
 		}
-	}, [userRole]);
+	}, []);
 	
 
   return (

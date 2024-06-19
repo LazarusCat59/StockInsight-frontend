@@ -6,9 +6,10 @@ import { LoginDetails } from "../../types";
 import React from 'react'
 
 const Logout = () => {
-    const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
+    const { loginToken, setLoginToken, userRole, setUserRole } = useContext(authContext) as LoginDetails;
     if(loginToken) {
         setLoginToken("");
+				setUserRole("");
     }
   return (
     <Navigate to='/login'/>

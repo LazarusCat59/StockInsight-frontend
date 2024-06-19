@@ -6,7 +6,7 @@ import { getStock, getChoices, createAudit, deleteAudit } from '../../apicalls';
 import { LoginDetails, Choices } from '../../types';
 
 const NewAudit = () => {
-	const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
+	const { loginToken, setLoginToken, userRole, setUserRole } = useContext(authContext) as LoginDetails;
 
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');

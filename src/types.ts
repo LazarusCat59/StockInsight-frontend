@@ -78,6 +78,8 @@ export interface ChoicesList {
 export interface LoginDetails {
 	loginToken: string;
 	setLoginToken: (logintoken: string) => void;
+	userRole: string;
+	setUserRole: (role: string) => void;
 }
 
 export function isAPIError(err: any): err is APIError {
