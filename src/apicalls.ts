@@ -214,7 +214,7 @@ export async function createAudit(token: string, stockId: number, condition: str
 	let checked_data = catchErrors(data);
 
 	if(typeof checked_data !== 'undefined' && isAudit(checked_data)) {
-		let stock: APIError | Stock | undefined = await makeRequest("PATCH", `http://127.0.0.1:8000/api/stock/${stockId}/`, { audit_details: checked_data.url }, { headers: { "Authorization" : `Token ${token}` }});
+		let stock: APIError | Stock | undefined = await makeRequest("POST", `http://127.0.0.1:8000/api/attachaudit/`, { stock_id: stockId, audit_id: checked_data.id }, { headers: { "Authorization" : `Token ${token}` }});
 
 		if (catchErrors(stock) === undefined) {
 			return;
