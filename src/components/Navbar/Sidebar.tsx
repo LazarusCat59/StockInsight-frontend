@@ -10,6 +10,7 @@ import { GoHistory } from "react-icons/go";
 import { IoMdSettings,IoMdLogOut } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdPostAdd } from "react-icons/md";
+import { RiAccountCircleFill } from "react-icons/ri";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -18,10 +19,12 @@ const Navbar = () => {
   const Menus = [
     { title: "Dashboard", path: "/" },
     { title: "Audits", icon: <AiOutlineAudit />, path: "/audit" },
-    { title: "Add Stock", icon: <MdPostAdd />, path: "/addstock" },
-    { title: "Requests", icon: <BiMessageEdit />, spacing: true, path: "/request" },
     { title: "Locations", icon: <FaLocationDot />, path: "/locations" },
-    { title: "Settings", icon: <IoMdSettings />, spacing: true, path: "/settings" }
+    { title: "Add Stock", icon: <MdPostAdd />, path: "/addstock" },
+    { title: "Add User ", icon: <RiAccountCircleFill/>, spacing: true, path: "/AddUser" },
+    { title: "AuditSelect", icon: <BiMessageEdit />, spacing: true, path: "/Auditselect" }
+  
+   
   ];
 
   let navigate = useNavigate(); 

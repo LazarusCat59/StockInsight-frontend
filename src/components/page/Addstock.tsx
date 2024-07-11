@@ -6,6 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { getChoices, createStock } from '../../apicalls';
 import { authContext } from '../../App';
 import { Choices, LoginDetails } from '../../types';
+import { FaComputer } from "react-icons/fa6";
 
 const Addstock = () => {
   const [condition, setCondition] = useState('');
@@ -87,7 +88,9 @@ const Addstock = () => {
       <Sidebar />
       <div>
         <div className='flex justify-center w-[85rem] mt-3'>
-          <div className='bg-slate-200 border rounded-full h-36 w-36'></div>
+          <div className='bg-custom-gray border rounded-full h-36 w-36'>
+          <FaComputer className="w-36 h-36  text-custom-black object-cover aspect-square p-5 mx-auto"/>
+          </div>
         </div>
         <div className='flex justify-center items-center w-[85rem] '>
           <Inputbox ph="stock name" tag="Name: " value={stockName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setstockName(e.target.value)} />
