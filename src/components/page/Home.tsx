@@ -18,7 +18,7 @@ const Home = () => {
     navigate(path);
   };
 
-  console.log(loginToken);
+  // console.log(loginToken);
 
   useEffect(() => {
     const fetchAudits = async () => {

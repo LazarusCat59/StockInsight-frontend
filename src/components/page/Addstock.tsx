@@ -11,15 +11,15 @@ const Addstock = () => {
   const [condition, setCondition] = useState('');
   const [category, setCategory] = useState('');
   const [itemCode, setItemCode] = useState('');
-  const [desc, setdesc] = useState('');
+  const [desc, setDesc] = useState('');
   const [date, setDate] = useState(new Date());
-  const [billNo, setbillNo] = useState('');
+  const [billNo, setBillNo] = useState('');
   const [loc, setLoc] = useState('');
   const [stockName, setstockName] = useState('');
   const [locations, setLocations] = useState<Array<Choices>>([{ name: '', code: '' }]);
   const [conditions, setConditions] = useState<Array<Choices>>([{ name: '', code: '' }]);
   const [categories, setCategories] = useState<Array<Choices>>([{ name: '', code: '' }]);
-  const { loginToken, setLoginToken } = useContext(authContext) as LoginDetails;
+  const { loginToken, setLoginToken, userRole, setUserRole } = useContext(authContext) as LoginDetails;
 
   useEffect(() => {
     getChoices(loginToken, 1).then(cat => {
@@ -43,7 +43,6 @@ const Addstock = () => {
     const { name, value } = event.target;
     switch (name) {
       case 'category':
-        console.log("Here I am");
         setCategory(value);
         break;
       case 'condition':
@@ -78,11 +77,9 @@ const Addstock = () => {
 		// const parts = dateTimeFormat.formatToParts(date);
 		// console.log(parts)
 		let purchasedate = date.toISOString().slice(0,10)
-		createStock(loginToken, stockName, category, desc, itemCode, billNo, purchasedate, loc).then(stock => {
-      console.log(stock)
-    })
+		createStock(loginToken, stockName, category, desc, itemCode, billNo, purchasedate, loc);
 
-    console.log(formData);
+    // console.log(formData);
   };
 
   return (
@@ -100,9 +97,9 @@ const Addstock = () => {
           <div className='flex '>
             <div>
               <div className='mr-36'>
-                <Inputbox ph="description" tag="Desc :" value={desc} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setdesc(e.target.value)} />
+                <Inputbox ph="description" tag="Desc :" value={desc} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDesc(e.target.value)} />
                 <Inputbox ph="item code" tag="Code :" value={itemCode} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setItemCode(e.target.value)} />
-              <Inputbox ph="bill number" tag="BillNo: " value={billNo} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setbillNo(e.target.value)} />
+              <Inputbox ph="bill number" tag="BillNo: " value={billNo} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBillNo(e.target.value)} />
 
               <div className='flex mt-5'>
               <h1 className='text-xl font-semibold'>Date:</h1>
