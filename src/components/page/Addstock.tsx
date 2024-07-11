@@ -121,7 +121,7 @@ const Addstock = () => {
               </div>
               <div className='flex mt-5'>
               <h1 className='text-xl font-semibold'>Condition:</h1>
-                <select name="condition" id="location" className="  text-custom-yellow bg-gradient-to-r mx-6  bg-custom-black hover:bg-gradient-to-bl  hover:bg-custom-black hover:text-custom-white focus:ring-4 focus:outline-none focus:ring-blue-700 font-medium rounded-lg text-sm ml-3  px-5 py-2.5 text-center inline-flex items-center dark:bg-custom-black dark:hover:bg-custom-black dark:focus:ring-blue-800   focus:border-custom-white  h-12 w-56 p-5 appearance-none  border border-custom-yellow  focus:ring-opacity-75" onChange={handleSelectChange} >
+                <select name="condition" id="location" className="  text-custom-yellow bg-gradient-to-r mx-6  bg-custom-black hover:bg-gradient-to-bl  hover:bg-custom-black hover:text-custom-white focus:ring-4 focus:outline-none focus:ring-blue-700 font-medium rounded-lg text-sm ml-3  px-5 py-2.5 text-center inline-flex items-center dark:bg-custom-black dark:hover:bg-custom-black dark:focus:ring-blue-800   focus:border-custom-white  h-12 w-56 p-5 appearance-none  border border-custom-yellow  focus:ring-opacity-75" onChange={handleSelectChange} disabled>
 								<option value="">-- Select Condition --</option>
                   {conditions.map((item, index) => (
                     <option key={index} value={item.code}>
@@ -155,7 +155,7 @@ const Addstock = () => {
                 rows={2}
                 className="block p-2.5 w-[36rem]  ml-2 mt-5   focus:ring-blue-500 focus:border-blue-500 placeholder-custom-yellow hover:placeholder-custom-white bg-custom-black border mx-5  border-custom-yellow text-custom-white placeholder:text-custom-yellow  text-sm rounded-lg "
                 placeholder="Description"
-              ></textarea>
+              disabled></textarea>
             </div>
 
           </div>
