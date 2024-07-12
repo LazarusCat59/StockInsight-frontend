@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { authContext } from "../../App";
+import { LoginDetails } from '../../types';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { HiArrowCircleLeft } from "react-icons/hi";
@@ -12,20 +14,34 @@ import { FaLocationDot } from "react-icons/fa6";
 import { MdPostAdd } from "react-icons/md";
 import { RiAccountCircleFill } from "react-icons/ri";
 
+interface Sidebar {
+  title: string,
+  path: string,
+  icon?: JSX.Element,
+  spacing?: boolean,
+}
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const handleMouseEnter = () => { setOpen(true); };
   const handleMouseLeave = () => { setOpen(false); };
-  const Menus = [
+  let Menus: Array<Sidebar> = [
     { title: "Dashboard", path: "/" },
     { title: "Audits", icon: <AiOutlineAudit />, path: "/audit" },
     { title: "Locations", icon: <FaLocationDot />, path: "/locations" },
-    { title: "Add Stock", icon: <MdPostAdd />, path: "/addstock" },
-    { title: "Add User ", icon: <RiAccountCircleFill/>, spacing: true, path: "/AddUser" },
-    { title: "AuditSelect", icon: <BiMessageEdit />, spacing: true, path: "/Auditselect" }
-  
-   
   ];
+
+  const { loginToken, setLoginToken, userRole, setUserRole } = useContext(authContext) as LoginDetails;
+
+  if(userRole === "HOD") {
+    Menus.push({ title: "Add Stock", icon: <MdPostAdd />, path: "/addstock" });
+    Menus.push({ title: "Add User ", icon: <RiAccountCircleFill/>, spacing: true, path: "/AddUser" });
+    Menus.push({ title: "AuditSelect", icon: <BiMessageEdit />, spacing: true, path: "/Auditselect" });
+  }
+
+  if(userRole === "CDN") {
+    Menus.push({ title: "Add Stock", icon: <MdPostAdd />, path: "/addstock" });
+  }
 
   let navigate = useNavigate(); 
   const routeChange = () =>{ 

@@ -75,14 +75,14 @@ const Reportsto: React.FC = () => {
                                   <p>Auditor: {auditDetails.auditor}</p>
                               </div>
                           </div>
-                          <div className="text-center mt-8">
+                          {/* <div className="text-center mt-8">
                               <button
                                   type="submit"
                                   className="text-white bg-gradient-to-r from-slate-600  to-zinc-900 hover:bg-gradient-to-br  focus:outline-none font-medium rounded-lg text-sm px-5 w-[10rem] py-2.5 text-center me-2 mb-2"
                               >
                                   Download Report
                               </button>
-                          </div>
+                          </div> */}
                       </form>
                   </main>
               </div>

@@ -82,7 +82,7 @@ const Login = () => {
             </div>
           </div>
           <div className="flex justify-center mb-20 mt-20">
-      <button type="submit" className={`text-white bg-gray-500 hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"`} onClick={routeChange} >Select Account Type</button>
+      {/* <button type="submit" className={`text-white bg-gray-500 hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"`} onClick={routeChange} >Select Account Type</button> */}
       </div>
         </div>
         

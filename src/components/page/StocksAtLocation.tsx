@@ -33,9 +33,9 @@ const StocksAtLocation = () => {
 	}, []);
 
   return (
-    <div className="flex justify-start h-full">
+    <div className="flex justify-start  h-full">
     <Sidebar />
-    <div className='px-16 mx-auto'>
+    <div className='px-16 mx-auto h-screen'>
     <div className="container mx-auto mt-8 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-flow-row">
 		{stocks.map((item, index) => (
 		<div key={index} className="outline  outline-custom-yellow hover:bg-custom-yellow rounded mx-2 my-2 p-3 bg-custom-gray hover:text-custom-black text-custom-white font-bold">

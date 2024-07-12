@@ -88,7 +88,7 @@ const AuditPage = () => {
 	// }, [audits]);
 
 	return (
-<div className="flex">
+<div className="flex h-screen">
   <Sidebar />
 	<div className=" border border-custom-black shadow-md bg-custom-gray  mb-8 flex justify-center  w-full mx-auto">
             <div className="flex flex-col w-full p-4">
