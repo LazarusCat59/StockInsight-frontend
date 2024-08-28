@@ -1,3 +1,9 @@
+# Frontend written in React for StockInsight
+
+We use a REST API for backend, written in Python, using the Django framework.
+
+The backend can found at [stockinsight-backend](https://github.com/LazarusCat59/stockinsight-backend)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
